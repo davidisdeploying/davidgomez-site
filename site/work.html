@@ -208,7 +208,7 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
   <h1>What I do<br>at <em>work</em></h1>
   <p class="wsub">A plain-English guide to my job as a Configuration Technician &mdash; for anyone who's ever wondered what I actually do all day.</p>
   <div class="wstats">
-    <div class="wstat"><span class="n">6+</span><span class="l">Months on the job</span></div>
+    <div class="wstat"><span class="n" id="months-on-job">9+</span><span class="l">Months on the job</span></div>
     <div class="wstat"><span class="n">6</span><span class="l">Major customers served</span></div>
     <div class="wstat"><span class="n">138</span><span class="l">Pages of SOPs I work from</span></div>
     <div class="wstat"><span class="n">&#8734;</span><span class="l">Details that matter</span></div>
@@ -336,5 +336,8 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
 
 </div>
 <footer><span class="footer-name">DAVID GOMEZ &middot; FutureTech Enterprise &middot; Plano, TX</span><div class="footer-links"><a href="mailto:david@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a></div></footer>
+<script>
+(function(){var el=document.getElementById("months-on-job");if(!el)return;var start=new Date(2025,8,15),now=new Date();var m=(now.getFullYear()-start.getFullYear())*12+(now.getMonth()-start.getMonth());if(now.getDate()<start.getDate())m--;if(m<0)m=0;el.textContent=m+"+";})();
+</script>
 </body>
 </html>
