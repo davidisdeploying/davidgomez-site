@@ -87,7 +87,9 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (max-width:640px){
-  nav{padding:16px 22px}.nav-links{gap:18px}
+  nav{flex-direction:column;align-items:flex-start;gap:13px;padding:14px 20px}
+  .nav-links{width:100%;gap:10px 16px;justify-content:flex-start}
+  .nav-links a{font-size:11.5px}
   footer{padding:20px 22px;flex-direction:column;align-items:flex-start}
 }
 
