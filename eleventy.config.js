@@ -50,7 +50,7 @@ export default function (eleventyConfig) {
     return { w: W, h: H, nodes };
   });
 
-  ["index", "work", "davidisdeploying", "resume"].forEach((p) =>
+  ["work", "davidisdeploying", "resume"].forEach((p) =>
     eleventyConfig.addPassthroughCopy({ ["site/" + p + ".html"]: p + ".html" })
   );
   return {

@@ -1,3 +1,6 @@
+---
+permalink: "/index.html"
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +24,6 @@ a{color:var(--amber);text-decoration:none}
 em{font-style:italic}
 ::selection{background:rgba(186,117,23,.3);color:var(--ink)}
 
-/* NAV */
 nav{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;
   padding:17px 40px;background:rgba(21,17,13,.85);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line)}
@@ -35,7 +37,6 @@ nav{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;
 .nav-links a:hover{color:var(--ink)}
 .nav-links a.active{color:var(--amber)}
 
-/* shared text bits */
 .eyebrow{font-family:var(--mo);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);
   display:inline-flex;align-items:center;gap:9px}
 .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber);
@@ -43,13 +44,11 @@ nav{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;
 h1,h2,h3{font-family:var(--hd);font-weight:600;line-height:1.1;color:var(--ink)}
 .lead{font-family:var(--bd);font-size:18px;line-height:1.7;color:var(--mut)}
 
-/* SECTION head with hairline rule */
 .shead{display:flex;align-items:center;gap:16px;margin-bottom:24px}
 .shead .lbl{font-family:var(--mo);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--amber);white-space:nowrap}
 .shead .rule{flex:1;height:1px;background:var(--line)}
 
-/* spec-plate (signature) */
 .plate{margin-top:34px;border:1px solid var(--line);border-radius:10px;
   background:linear-gradient(#1c160e,#181109);display:flex;flex-wrap:wrap;overflow:hidden}
 .plate .cell{padding:13px 20px;border-right:1px solid var(--line);flex:1;min-width:150px}
@@ -59,13 +58,6 @@ h1,h2,h3{font-family:var(--hd);font-weight:600;line-height:1.1;color:var(--ink)}
 .plate .v .live{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px 1px rgba(70,176,110,.5)}
 .plate .v.lit{color:var(--lit)}
 
-/* buttons */
-.btn{font-family:var(--mo);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
-  background:#221b13;border:1px solid var(--line);border-radius:7px;color:var(--ink);padding:9px 16px;
-  display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:border-color .12s,color .12s}
-.btn:hover{border-color:var(--amber);color:var(--lit)}
-
-/* footer */
 footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;display:flex;
   justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:var(--bg2)}
 .footer-name{font-family:var(--mo);font-size:11px;letter-spacing:.04em;color:var(--mut)}
@@ -81,43 +73,51 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
   footer{padding:20px 22px;flex-direction:column;align-items:flex-start}
 }
 
-.hero{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:900px;margin:0 auto;
-  padding:84px 40px 72px;width:100%}
-.hero .eyebrow{margin-bottom:22px;opacity:0;animation:fadeUp .6s ease .1s forwards}
+.home{flex:1;max-width:900px;margin:0 auto;padding:84px 40px 80px;width:100%}
+.home .eyebrow{margin-bottom:22px;opacity:0;animation:fadeUp .6s ease .1s forwards}
 .hero-title{font-family:var(--hd);font-size:clamp(46px,7vw,78px);line-height:1.05;margin-bottom:26px;
   opacity:0;animation:fadeUp .6s ease .2s forwards}
 .hero-title em{color:var(--lit)}
 .hero-sub{font-family:var(--bd);font-size:18px;color:var(--mut);max-width:560px;line-height:1.7;
   margin-bottom:8px;opacity:0;animation:fadeUp .6s ease .3s forwards}
-.hero .plate{opacity:0;animation:fadeUp .6s ease .4s forwards}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:48px;
-  opacity:0;animation:fadeUp .6s ease .52s forwards}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:30px 32px;
-  display:flex;flex-direction:column;gap:11px;position:relative;overflow:hidden;
+.home .plate{opacity:0;animation:fadeUp .6s ease .4s forwards}
+
+.tilehead{margin-top:60px;opacity:0;animation:fadeUp .6s ease .5s forwards}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;
+  opacity:0;animation:fadeUp .6s ease .56s forwards}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 28px;
+  display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;min-height:226px;
   box-shadow:inset 0 0 0 1px rgba(233,228,214,.035);
   transition:border-color .12s,transform .12s,box-shadow .12s}
-.card::before{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--amber);
+.tile::before{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--amber);
   transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
-.card:hover{border-color:var(--amber);transform:translateY(-2px);box-shadow:0 14px 34px -18px rgba(0,0,0,.7)}
-.card:hover::before{transform:scaleX(1)}
-.card-tag{font-family:var(--mo);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
-.card-title{font-family:var(--hd);font-size:22px;line-height:1.25;color:var(--ink)}
-.card-desc{font-family:var(--bd);font-size:14px;color:var(--mut);line-height:1.65;flex:1}
-.card-arrow{font-family:var(--mo);font-size:18px;color:var(--line);align-self:flex-end;margin-top:8px;
+.tile:hover{border-color:var(--amber);transform:translateY(-2px);box-shadow:0 14px 34px -18px rgba(0,0,0,.7)}
+.tile:hover::before{transform:scaleX(1)}
+.tile-tag{font-family:var(--mo);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.tile-title{font-family:var(--hd);font-size:25px;line-height:1.2;color:var(--ink)}
+.tile-desc{font-family:var(--bd);font-size:14px;color:var(--mut);line-height:1.6;flex:1}
+.tile-arrow{font-family:var(--mo);font-size:18px;color:var(--line);align-self:flex-end;margin-top:8px;
   transition:color .2s,transform .2s}
-.card:hover .card-arrow{color:var(--lit);transform:translate(3px,-3px)}
-.card-ph{border-style:dashed;background:transparent;box-shadow:none}
-.card-ph::before{display:none}
-.card-ph:hover{transform:none;border-color:var(--line);box-shadow:none}
-.card-ph .card-title{color:var(--mut);font-style:italic;font-size:19px}
-.card-ph .card-desc{color:var(--line)}
-.card-ph .card-tag{color:var(--line)}
-@media (max-width:600px){.hero{padding:56px 22px 48px}}
+.tile:hover .tile-arrow{color:var(--lit);transform:translate(3px,-3px)}
+@media (min-width:680px){.tile{aspect-ratio:1/1;min-height:0}}
+
+.homemap{margin-top:64px;opacity:0;animation:fadeUp .6s ease .62s forwards}
+.maplink{font-family:var(--mo);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);white-space:nowrap;transition:color .12s}
+.maplink:hover{color:var(--lit)}
+.bubblewrap{max-width:760px;margin:6px auto 0;width:100%}
+.bubbles{width:100%;height:auto;display:block;overflow:visible}
+.bubbles .orb{cursor:pointer}
+.bubbles circle{transition:opacity .15s}
+.bubbles .orb:hover circle{opacity:.82}
+.bubbles .cnt{font-family:var(--mo);font-weight:500;fill:#15110d;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.bubbles .lbl{font-family:var(--mo);fill:#1f1710;text-anchor:middle;dominant-baseline:central;pointer-events:none;letter-spacing:.02em}
+
+@media (max-width:600px){.home{padding:56px 22px 56px}}
 </style>
 </head>
 <body>
 <nav><a href="index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="index.html" class="active">Home</a></li><li><a href="work.html">Work</a></li><li><a href="davidisdeploying.html">Projects</a></li><li><a href="devblog.html">Devblog</a></li><li><a href="resume.html">Résumé</a></li></ul></nav>
-<main class="hero">
+<main class="home">
   <div class="eyebrow">davidgomez.cc</div>
   <h1 class="hero-title">Hi, I'm<br><em>David Gomez.</em></h1>
   <p class="hero-sub">Configuration Technician working at the intersection of enterprise IT, hardware deployment, and the defense supply chain. Based in Plano, TX.</p>
@@ -129,25 +129,67 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
     <div class="cell"><div class="k">Status</div><div class="v lit"><span class="live"></span>In service</div></div>
   </div>
 
-  <div class="cards">
-    <a href="work.html" class="card">
-      <span class="card-tag">Deep dive</span>
-      <div class="card-title">What I do for work</div>
-      <p class="card-desc">A detailed look at my role configuring enterprise hardware for some of the most security-conscious organizations in the world.</p>
-      <span class="card-arrow">&#8599;</span>
+  <div class="shead tilehead"><span class="lbl">Around here</span><span class="rule"></span></div>
+  <div class="tiles">
+    <a href="work.html" class="tile">
+      <span class="tile-tag">Deep dive</span>
+      <div class="tile-title">Work</div>
+      <p class="tile-desc">What I do configuring enterprise hardware for some of the most security-conscious organizations in the world.</p>
+      <span class="tile-arrow">&#8599;</span>
     </a>
-    <a href="resume.html" class="card">
-      <span class="card-tag">Background</span>
-      <div class="card-title">R&eacute;sum&eacute;</div>
-      <p class="card-desc">Full work history, skills, and education &mdash; from logistics and IT support to enterprise hardware deployment.</p>
-      <span class="card-arrow">&#8599;</span>
+    <a href="davidisdeploying.html" class="tile">
+      <span class="tile-tag">Builds</span>
+      <div class="tile-title">Projects</div>
+      <p class="tile-desc">Things I've shipped &mdash; Loupe, Tandem, this site &mdash; with the stack behind each.</p>
+      <span class="tile-arrow">&#8599;</span>
     </a>
-    <div class="card card-ph">
-      <span class="card-tag">Coming soon</span>
-      <div class="card-title">More coming soon</div>
-      <p class="card-desc">This page will grow over time.</p>
-    </div>
+    <a href="devblog.html" class="tile">
+      <span class="tile-tag">Working notes</span>
+      <div class="tile-title">Devblog</div>
+      <p class="tile-desc">Near-daily build logs: what got made, what broke, and what I learned fixing it.</p>
+      <span class="tile-arrow">&#8599;</span>
+    </a>
+    <a href="/stack.html" class="tile">
+      <span class="tile-tag">The map</span>
+      <div class="tile-title">Stack</div>
+      <p class="tile-desc">Every technology and idea I've touched, sized by how often it comes up.</p>
+      <span class="tile-arrow">&#8599;</span>
+    </a>
+    <a href="resume.html" class="tile">
+      <span class="tile-tag">Background</span>
+      <div class="tile-title">R&eacute;sum&eacute;</div>
+      <p class="tile-desc">Full work history, skills, and education &mdash; logistics and IT support to hardware deployment.</p>
+      <span class="tile-arrow">&#8599;</span>
+    </a>
   </div>
+
+  {%- if collections.topicmap.nodes | length %}
+  <section class="homemap">
+    <div class="shead"><span class="lbl">Everything I've touched</span><span class="rule"></span><a class="maplink" href="/stack.html">Full map &rarr;</a></div>
+    <div class="bubblewrap">
+      <svg class="bubbles" viewBox="0 0 {{ collections.topicmap.w }} {{ collections.topicmap.h }}" role="img" aria-label="Topics sized by frequency">
+        <defs>
+          <radialGradient id="orb" cx="48%" cy="40%" r="65%">
+            <stop offset="0%" stop-color="#E2902A" stop-opacity="0.96"/>
+            <stop offset="58%" stop-color="#BA7517" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#BA7517" stop-opacity="0.12"/>
+          </radialGradient>
+          <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        {%- for n in collections.topicmap.nodes %}
+        <a href="/devblog/topic/{{ n.slug }}.html" class="orb"><title>{{ n.topic }} &mdash; {{ n.count }} post{% if n.count != 1 %}s{% endif %}</title>
+          <circle cx="{{ n.x }}" cy="{{ n.y }}" r="{{ n.r }}" fill="url(#orb)" filter="url(#glow)"/>
+          <text class="cnt" x="{{ n.x }}" y="{{ n.cyCount }}" style="font-size:{{ n.cfont }}px">{{ n.count }}</text>
+          {%- if n.showLabel %}<text class="lbl" x="{{ n.x }}" y="{{ n.cyLabel }}" style="font-size:{{ n.lfont }}px">{{ n.topic }}</text>{% endif %}
+        </a>
+        {%- endfor %}
+      </svg>
+    </div>
+  </section>
+  {%- endif %}
 </main>
 <footer><span class="footer-name">DAVID GOMEZ &middot; Plano, TX</span><div class="footer-links"><a href="mailto:david@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a></div></footer>
 </body>
