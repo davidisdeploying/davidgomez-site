@@ -1,0 +1,21 @@
+---
+layout: base.njk
+title: Devblog
+permalink: /devblog.html
+---
+<main>
+  <div class="phero">
+    <div class="eyebrow">Devblog</div>
+    <h1>Working <em>notes</em></h1>
+    <p class="lead">Near-daily notes on building Loupe, side projects, and whatever I'm learning across tech, the cloud, and getting better at the craft &mdash; drawn from the build log I keep as I go.</p>
+  </div>
+  <div class="bloglist"><div class="posts">
+  {%- for post in collections.post | reverse %}
+    <a class="pcard" href="{{ post.url }}">
+      <div class="pmeta">{{ post.data.date | readable }}{% for t in post.data.topics %} &middot; {{ t }}{% endfor %}</div>
+      <div class="ptitle">{{ post.data.title }}</div>
+      <div class="psum">{{ post.data.summary }}</div>
+    </a>
+  {%- endfor %}
+  </div></div>
+</main>

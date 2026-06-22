@@ -1,0 +1,21 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+<channel>
+<title>David Gomez — Devblog</title>
+<link>https://davidgomez.cc/devblog.html</link>
+<description>Working notes on building Loupe, side projects, and learning in tech.</description>
+{%- for post in collections.post | reverse %}
+<item>
+<title>{{ post.data.title }}</title>
+<link>https://davidgomez.cc{{ post.url }}</link>
+<guid>https://davidgomez.cc{{ post.url }}</guid>
+<pubDate>{{ post.data.date | rfc822 }}</pubDate>
+<description>{{ post.data.summary }}</description>
+</item>
+{%- endfor %}
+</channel>
+</rss>

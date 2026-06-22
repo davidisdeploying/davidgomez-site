@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Gomez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#15110d;--bg2:#1d1812;--panel:#241d15;--line:#3a2e22;
+  --ink:#ece2d3;--ink2:#d6cbb8;--mut:#9c8b76;
+  --amber:#BA7517;--lit:#E2902A;--green:#46b06e;--cut:#bf463b;
+  --film:#0c0a07;--rebate:#1B1610;
+  --hd:'Fraunces',Georgia,serif;--bd:'Newsreader',Georgia,serif;--mo:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--bd);background:var(--bg);color:var(--ink2);font-size:16px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--amber);text-decoration:none}
+em{font-style:italic}
+::selection{background:rgba(186,117,23,.3);color:var(--ink)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;
+  padding:17px 40px;background:rgba(21,17,13,.85);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line)}
+.nav-logo{font-family:var(--hd);font-size:20px;font-weight:600;color:var(--ink);letter-spacing:.01em;
+  display:inline-flex;align-items:center;gap:9px}
+.nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 8px 1px rgba(226,144,42,.65)}
+.nav-links{display:flex;flex-wrap:wrap;gap:20px;list-style:none;align-items:center}
+.nav-links a{font-family:var(--mo);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--mut);transition:color .12s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--amber)}
+
+/* shared text bits */
+.eyebrow{font-family:var(--mo);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);
+  display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 9px 1px rgba(226,144,42,.6)}
+h1,h2,h3{font-family:var(--hd);font-weight:600;line-height:1.1;color:var(--ink)}
+.lead{font-family:var(--bd);font-size:18px;line-height:1.7;color:var(--mut)}
+
+/* SECTION head with hairline rule */
+.shead{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.shead .lbl{font-family:var(--mo);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);white-space:nowrap}
+.shead .rule{flex:1;height:1px;background:var(--line)}
+
+/* spec-plate (signature) */
+.plate{margin-top:34px;border:1px solid var(--line);border-radius:10px;
+  background:linear-gradient(#1c160e,#181109);display:flex;flex-wrap:wrap;overflow:hidden}
+.plate .cell{padding:13px 20px;border-right:1px solid var(--line);flex:1;min-width:150px}
+.plate .cell:last-child{border-right:none}
+.plate .k{font-family:var(--mo);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.plate .v{font-family:var(--mo);font-size:14px;color:var(--ink);margin-top:6px;display:flex;align-items:center;gap:7px}
+.plate .v .live{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px 1px rgba(70,176,110,.5)}
+.plate .v.lit{color:var(--lit)}
+
+/* buttons */
+.btn{font-family:var(--mo);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  background:#221b13;border:1px solid var(--line);border-radius:7px;color:var(--ink);padding:9px 16px;
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:border-color .12s,color .12s}
+.btn:hover{border-color:var(--amber);color:var(--lit)}
+
+/* footer */
+footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;display:flex;
+  justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:var(--bg2)}
+.footer-name{font-family:var(--mo);font-size:11px;letter-spacing:.04em;color:var(--mut)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-family:var(--mo);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--mut);transition:color .12s}
+.footer-links a:hover{color:var(--lit)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:640px){
+  nav{padding:16px 22px}.nav-links{gap:18px}
+  footer{padding:20px 22px;flex-direction:column;align-items:flex-start}
+}
+
+.hero{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:900px;margin:0 auto;
+  padding:84px 40px 72px;width:100%}
+.hero .eyebrow{margin-bottom:22px;opacity:0;animation:fadeUp .6s ease .1s forwards}
+.hero-title{font-family:var(--hd);font-size:clamp(46px,7vw,78px);line-height:1.05;margin-bottom:26px;
+  opacity:0;animation:fadeUp .6s ease .2s forwards}
+.hero-title em{color:var(--lit)}
+.hero-sub{font-family:var(--bd);font-size:18px;color:var(--mut);max-width:560px;line-height:1.7;
+  margin-bottom:8px;opacity:0;animation:fadeUp .6s ease .3s forwards}
+.hero .plate{opacity:0;animation:fadeUp .6s ease .4s forwards}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:48px;
+  opacity:0;animation:fadeUp .6s ease .52s forwards}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:30px 32px;
+  display:flex;flex-direction:column;gap:11px;position:relative;overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(233,228,214,.035);
+  transition:border-color .12s,transform .12s,box-shadow .12s}
+.card::before{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--amber);
+  transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.card:hover{border-color:var(--amber);transform:translateY(-2px);box-shadow:0 14px 34px -18px rgba(0,0,0,.7)}
+.card:hover::before{transform:scaleX(1)}
+.card-tag{font-family:var(--mo);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.card-title{font-family:var(--hd);font-size:22px;line-height:1.25;color:var(--ink)}
+.card-desc{font-family:var(--bd);font-size:14px;color:var(--mut);line-height:1.65;flex:1}
+.card-arrow{font-family:var(--mo);font-size:18px;color:var(--line);align-self:flex-end;margin-top:8px;
+  transition:color .2s,transform .2s}
+.card:hover .card-arrow{color:var(--lit);transform:translate(3px,-3px)}
+.card-ph{border-style:dashed;background:transparent;box-shadow:none}
+.card-ph::before{display:none}
+.card-ph:hover{transform:none;border-color:var(--line);box-shadow:none}
+.card-ph .card-title{color:var(--mut);font-style:italic;font-size:19px}
+.card-ph .card-desc{color:var(--line)}
+.card-ph .card-tag{color:var(--line)}
+@media (max-width:600px){.hero{padding:56px 22px 48px}}
+</style>
+</head>
+<body>
+<nav><a href="index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="index.html" class="active">Home</a></li><li><a href="work.html">Work</a></li><li><a href="davidisdeploying.html">Projects</a></li><li><a href="devblog.html">Devblog</a></li><li><a href="resume.html">Résumé</a></li></ul></nav>
+<main class="hero">
+  <div class="eyebrow">davidgomez.cc</div>
+  <h1 class="hero-title">Hi, I'm<br><em>David Gomez.</em></h1>
+  <p class="hero-sub">Configuration Technician working at the intersection of enterprise IT, hardware deployment, and the defense supply chain. Based in Plano, TX.</p>
+
+  <div class="plate">
+    <div class="cell"><div class="k">Role</div><div class="v">Configuration Technician</div></div>
+    <div class="cell"><div class="k">Sector</div><div class="v">Defense IT Supply Chain</div></div>
+    <div class="cell"><div class="k">Based</div><div class="v">Plano, TX</div></div>
+    <div class="cell"><div class="k">Status</div><div class="v lit"><span class="live"></span>In service</div></div>
+  </div>
+
+  <div class="cards">
+    <a href="work.html" class="card">
+      <span class="card-tag">Deep dive</span>
+      <div class="card-title">What I do for work</div>
+      <p class="card-desc">A detailed look at my role configuring enterprise hardware for some of the most security-conscious organizations in the world.</p>
+      <span class="card-arrow">&#8599;</span>
+    </a>
+    <a href="resume.html" class="card">
+      <span class="card-tag">Background</span>
+      <div class="card-title">R&eacute;sum&eacute;</div>
+      <p class="card-desc">Full work history, skills, and education &mdash; from logistics and IT support to enterprise hardware deployment.</p>
+      <span class="card-arrow">&#8599;</span>
+    </a>
+    <div class="card card-ph">
+      <span class="card-tag">Coming soon</span>
+      <div class="card-title">More coming soon</div>
+      <p class="card-desc">This page will grow over time.</p>
+    </div>
+  </div>
+</main>
+<footer><span class="footer-name">DAVID GOMEZ &middot; Plano, TX</span><div class="footer-links"><a href="mailto:david@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a></div></footer>
+</body>
+</html>

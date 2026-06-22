@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What I Do at Work &middot; David Gomez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#15110d;--bg2:#1d1812;--panel:#241d15;--line:#3a2e22;
+  --ink:#ece2d3;--ink2:#d6cbb8;--mut:#9c8b76;
+  --amber:#BA7517;--lit:#E2902A;--green:#46b06e;--cut:#bf463b;
+  --film:#0c0a07;--rebate:#1B1610;
+  --hd:'Fraunces',Georgia,serif;--bd:'Newsreader',Georgia,serif;--mo:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--bd);background:var(--bg);color:var(--ink2);font-size:16px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--amber);text-decoration:none}
+em{font-style:italic}
+::selection{background:rgba(186,117,23,.3);color:var(--ink)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;
+  padding:17px 40px;background:rgba(21,17,13,.85);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line)}
+.nav-logo{font-family:var(--hd);font-size:20px;font-weight:600;color:var(--ink);letter-spacing:.01em;
+  display:inline-flex;align-items:center;gap:9px}
+.nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 8px 1px rgba(226,144,42,.65)}
+.nav-links{display:flex;flex-wrap:wrap;gap:20px;list-style:none;align-items:center}
+.nav-links a{font-family:var(--mo);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--mut);transition:color .12s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--amber)}
+
+/* shared text bits */
+.eyebrow{font-family:var(--mo);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);
+  display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 9px 1px rgba(226,144,42,.6)}
+h1,h2,h3{font-family:var(--hd);font-weight:600;line-height:1.1;color:var(--ink)}
+.lead{font-family:var(--bd);font-size:18px;line-height:1.7;color:var(--mut)}
+
+/* SECTION head with hairline rule */
+.shead{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.shead .lbl{font-family:var(--mo);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);white-space:nowrap}
+.shead .rule{flex:1;height:1px;background:var(--line)}
+
+/* spec-plate (signature) */
+.plate{margin-top:34px;border:1px solid var(--line);border-radius:10px;
+  background:linear-gradient(#1c160e,#181109);display:flex;flex-wrap:wrap;overflow:hidden}
+.plate .cell{padding:13px 20px;border-right:1px solid var(--line);flex:1;min-width:150px}
+.plate .cell:last-child{border-right:none}
+.plate .k{font-family:var(--mo);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.plate .v{font-family:var(--mo);font-size:14px;color:var(--ink);margin-top:6px;display:flex;align-items:center;gap:7px}
+.plate .v .live{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px 1px rgba(70,176,110,.5)}
+.plate .v.lit{color:var(--lit)}
+
+/* buttons */
+.btn{font-family:var(--mo);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  background:#221b13;border:1px solid var(--line);border-radius:7px;color:var(--ink);padding:9px 16px;
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:border-color .12s,color .12s}
+.btn:hover{border-color:var(--amber);color:var(--lit)}
+
+/* footer */
+footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;display:flex;
+  justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:var(--bg2)}
+.footer-name{font-family:var(--mo);font-size:11px;letter-spacing:.04em;color:var(--mut)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-family:var(--mo);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--mut);transition:color .12s}
+.footer-links a:hover{color:var(--lit)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:640px){
+  nav{padding:16px 22px}.nav-links{gap:18px}
+  footer{padding:20px 22px;flex-direction:column;align-items:flex-start}
+}
+
+.whero{padding:82px 40px 70px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;
+  background:radial-gradient(130% 110% at 50% 0%,#1e1710,#15110d)}
+.whero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:9px;
+  background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(233,228,214,.10) 9px 13px,transparent 13px 22px)}
+.whero-in{max-width:900px;margin:0 auto}
+.whero .eyebrow{margin-bottom:18px}
+.whero h1{font-family:var(--hd);font-size:clamp(40px,6vw,64px);line-height:1.06;max-width:640px;margin-bottom:22px}
+.whero h1 em{color:var(--lit)}
+.wsub{font-family:var(--bd);font-size:17px;color:var(--mut);max-width:520px;line-height:1.65}
+.wstats{margin-top:46px;display:flex;gap:44px;flex-wrap:wrap}
+.wstat{display:flex;flex-direction:column;gap:6px}
+.wstat .n{font-family:var(--hd);font-size:33px;font-weight:600;color:var(--ink);line-height:1}
+.wstat:first-child .n,.wstat.key .n{color:var(--lit)}
+.wstat .l{font-family:var(--mo);font-size:11px;letter-spacing:.05em;color:var(--mut)}
+
+.page{max-width:900px;margin:0 auto;padding:64px 32px}
+.section{margin-bottom:68px}
+.section-title{font-family:var(--hd);font-size:30px;line-height:1.15;margin:6px 0 18px;color:var(--ink)}
+.section-body{font-family:var(--bd);font-size:16px;color:var(--mut);line-height:1.75;max-width:680px}
+.section-body strong{color:var(--ink2);font-weight:500}
+.divider{border:none;border-top:1px solid var(--line);margin:0 0 68px}
+
+.feature{margin:26px 0;border-radius:14px;padding:34px 38px;
+  background:linear-gradient(160deg,#221a10,#1a140c);
+  box-shadow:0 0 0 1px rgba(186,117,23,.25),0 16px 42px -22px rgba(186,117,23,.5)}
+.feature p{font-family:var(--bd);font-style:italic;font-size:21px;line-height:1.5;color:var(--ink)}
+.feature p span{color:var(--lit);font-style:normal}
+
+.pq{border-left:3px solid var(--amber);padding:11px 24px;margin:30px 0;background:rgba(186,117,23,.06);
+  border-radius:0 8px 8px 0}
+.pq p{font-family:var(--bd);font-style:italic;font-size:19px;line-height:1.45;color:var(--lit)}
+
+.cust{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:12px;margin:30px 0}
+.ccard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;
+  transition:border-color .12s,transform .12s}
+.ccard:hover{border-color:var(--amber);transform:translateY(-2px)}
+.cname{font-family:var(--hd);font-size:16px;color:var(--ink);margin-bottom:6px}
+.cdesc{font-family:var(--bd);font-size:13px;color:var(--mut);line-height:1.6}
+.ctag{display:inline-block;margin-top:13px;font-family:var(--mo);font-size:8.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--lit);border:1px solid #5a3f1e;border-radius:20px;padding:3px 10px}
+
+.journey{margin:30px 0;border:1px solid var(--line);border-radius:13px;overflow:hidden;background:var(--bg2)}
+.jhead{padding:13px 22px;background:#1b150e;border-bottom:1px solid var(--line);font-family:var(--mo);
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.jstages{display:flex}
+.jstage{flex:1;padding:22px 18px;border-right:1px solid var(--line)}
+.jstage:last-child{border-right:none}
+.jnum{font-family:var(--mo);font-size:10px;letter-spacing:.1em;color:var(--mut)}
+.jt{font-family:var(--hd);font-size:15px;color:var(--ink);margin:9px 0 6px}
+.jd{font-family:var(--bd);font-size:12.5px;color:var(--mut);line-height:1.6}
+.jbadge{display:inline-block;margin-top:11px;font-family:var(--mo);font-size:8.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:20px;padding:2px 9px}
+.jmine{background:linear-gradient(165deg,rgba(186,117,23,.13),transparent);
+  box-shadow:inset 0 0 0 1px rgba(186,117,23,.3)}
+.jmine .jt{color:var(--lit)}
+.jmine .jbadge{color:#1a1308;background:var(--amber);border-color:var(--amber)}
+
+.flow{position:relative;margin:30px 0;display:flex;flex-direction:column}
+.flow::before{content:'';position:absolute;left:21px;top:16px;bottom:16px;width:2px;
+  background:linear-gradient(to bottom,rgba(186,117,23,.55),var(--line))}
+.fstep{display:flex;gap:20px;padding-bottom:26px;position:relative}
+.fdot{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;
+  justify-content:center;font-family:var(--mo);font-size:14px;color:var(--lit);background:#1b150e;
+  border:1px solid var(--line);position:relative;z-index:1}
+.fstep.done .fdot{color:var(--green);border-color:rgba(70,176,110,.45)}
+.fhead{font-family:var(--mo);font-size:13px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink);
+  margin-bottom:5px;padding-top:11px}
+.fdesc{font-family:var(--bd);font-size:14.5px;color:var(--mut);line-height:1.65}
+
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:30px 0}
+.scard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;
+  transition:border-color .12s,transform .12s}
+.scard:hover{border-color:var(--amber);transform:translateY(-2px)}
+.sidx{font-family:var(--mo);font-size:11px;letter-spacing:.12em;color:var(--lit);margin-bottom:13px}
+.sname{font-family:var(--hd);font-size:16px;color:var(--ink);margin-bottom:7px}
+.sdesc{font-family:var(--bd);font-size:13px;color:var(--mut);line-height:1.6}
+
+.tech{margin:30px 0;border:1px solid var(--line);border-radius:13px;overflow:hidden;background:var(--bg2)}
+.trow{display:flex;border-bottom:1px solid var(--line)}
+.trow:last-child{border-bottom:none}
+.tlabel{width:152px;flex-shrink:0;padding:18px 20px;border-right:1px solid var(--line);display:flex;align-items:center}
+.tlabel span{font-family:var(--mo);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--lit)}
+.titems{flex:1;padding:14px 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tpill{font-family:var(--mo);font-size:12px;color:var(--mut);background:#1d1711;border:1px solid var(--line);
+  border-radius:6px;padding:5px 12px}
+
+.hard{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0}
+.hcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px 20px;
+  transition:border-color .12s}
+.hcard:hover{border-color:var(--amber)}
+.hnum{font-family:var(--hd);font-size:36px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:10px}
+.hcard.stop .hnum{color:var(--cut)}
+.htitle{font-family:var(--mo);font-size:12px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+.hdesc{font-family:var(--bd);font-size:13px;color:var(--mut);line-height:1.6}
+
+@media (max-width:680px){
+  .whero{padding:56px 22px}.page{padding:48px 20px}
+  .jstages{flex-direction:column}.jstage{border-right:none;border-bottom:1px solid var(--line)}
+  .jstage:last-child{border-bottom:none}
+  .skills{grid-template-columns:1fr}.hard{grid-template-columns:1fr 1fr}
+  .wstats{gap:26px}.trow{flex-direction:column}.tlabel{width:auto;border-right:none;border-bottom:1px solid var(--line)}
+}
+@media (max-width:480px){.hard{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><a href="index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="work.html" class="active">Work</a></li><li><a href="davidisdeploying.html">Projects</a></li><li><a href="devblog.html">Devblog</a></li><li><a href="resume.html">Résumé</a></li></ul></nav>
+<div class="whero"><div class="whero-in">
+  <div class="eyebrow">FutureTech Enterprise &middot; Plano, TX</div>
+  <h1>What I do<br>at <em>work</em></h1>
+  <p class="wsub">A plain-English guide to my job as a Configuration Technician &mdash; for anyone who's ever wondered what I actually do all day.</p>
+  <div class="wstats">
+    <div class="wstat"><span class="n">6+</span><span class="l">Months on the job</span></div>
+    <div class="wstat"><span class="n">6</span><span class="l">Major customers served</span></div>
+    <div class="wstat"><span class="n">138</span><span class="l">Pages of SOPs I work from</span></div>
+    <div class="wstat"><span class="n">&#8734;</span><span class="l">Details that matter</span></div>
+  </div>
+</div></div>
+
+<div class="page">
+
+  <div class="section">
+    <div class="eyebrow">The big picture</div>
+    <h2 class="section-title">The one-sentence answer</h2>
+    <div class="feature"><p>I take brand-new laptops and desktops, configure every detail to <span>exact client specifications</span>, and certify they're ready before they ship to some of the most security-conscious organizations in the world.</p></div>
+    <p class="section-body">Think of it like a custom car dealership, but for enterprise computers. The customer orders hardware. It arrives at our facility. I'm the person who opens the box, sets everything up exactly right &mdash; right down to firmware settings no normal user would ever see &mdash; and documents every step so there's a verifiable paper trail. Then it ships.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="eyebrow">Industries served</div>
+    <h2 class="section-title">The industries I configure computers for</h2>
+    <p class="section-body">My company's customers span some of the most regulated and technically demanding industries in the world. These aren't ordinary businesses &mdash; they build aircraft, satellites, radar systems, and critical infrastructure for government programs. The computers I configure end up in the hands of their engineers, analysts, and field technicians, often working with government data that carries strict federal handling requirements.</p>
+    <div class="cust">
+      <div class="ccard"><div class="cname">Aviation &amp; Defense</div><div class="cdesc">Manufacturers of aircraft, spacecraft, radar, and advanced weapons systems. Navigate tough timelines and demanding compliance requirements.</div><span class="ctag">Primary sector</span></div>
+      <div class="ccard"><div class="cname">Defense &amp; Intelligence</div><div class="cdesc">Organizations building mission-critical systems for national security. Every device must meet strict security and documentation standards.</div><span class="ctag">Primary sector</span></div>
+      <div class="ccard"><div class="cname">Defense Communications</div><div class="cdesc">Companies building communications and electronics technology for battlefield, space, and critical infrastructure environments.</div><span class="ctag">Primary sector</span></div>
+      <div class="ccard"><div class="cname">Federal Systems Integration</div><div class="cdesc">Single-source IT solutions for government-aligned programs &mdash; from endpoint configuration to fully compliant work environments.</div><span class="ctag">Primary sector</span></div>
+      <div class="ccard"><div class="cname">Aerospace Electronics</div><div class="cdesc">Manufacturers of avionics, safety systems, and precision electronics used in commercial and military aircraft worldwide.</div><span class="ctag">Primary sector</span></div>
+      <div class="ccard"><div class="cname">Engineering &amp; Infrastructure</div><div class="cdesc">Global engineering firms supporting government infrastructure programs. Devices often handle Controlled Unclassified Information (CUI) and require VPN-based domain enrollment and federal data compliance.</div><span class="ctag">Primary sector</span></div>
+    </div>
+    <div class="pq"><p>Each industry has its own rulebook. The same laptop configured for one client looks completely different inside than one configured for another &mdash; even if the hardware is identical.</p></div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="eyebrow">The process</div>
+    <h2 class="section-title">How a computer goes from box to customer</h2>
+    <p class="section-body">Every device I touch goes through a defined journey. I work in the middle &mdash; the most technical part of the whole process.</p>
+    <div class="journey">
+      <div class="jhead">Lifecycle of a device at FutureTech</div>
+      <div class="jstages">
+        <div class="jstage"><div class="jnum">01</div><div class="jt">Order received</div><div class="jd">Customer places an order. S2K (our system) generates a Manufacturing Order (MO) &mdash; the job ticket.</div><span class="jbadge">Sales</span></div>
+        <div class="jstage"><div class="jnum">02</div><div class="jt">Stock pulled</div><div class="jd">Warehouse pulls the right hardware from inventory and stages it on a pallet. Checked against the MO.</div><span class="jbadge">Warehouse</span></div>
+        <div class="jstage jmine"><div class="jnum">03</div><div class="jt">Configuration</div><div class="jd">I open the box, verify everything is correct, configure every hardware and software setting, image the OS, and document each step.</div><span class="jbadge">&larr; This is me</span></div>
+        <div class="jstage"><div class="jnum">04</div><div class="jt">QC check</div><div class="jd">A second technician independently verifies my work. Both of us sign off. The MO is closed in S2K.</div><span class="jbadge">Quality Control</span></div>
+        <div class="jstage"><div class="jnum">05</div><div class="jt">Ship</div><div class="jd">Packaged, labeled, and handed off to the warehouse for shipment directly to the customer's facility.</div><span class="jbadge">Shipping</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="eyebrow">A typical day</div>
+    <h2 class="section-title">What I actually do, step by step</h2>
+    <p class="section-body">No two orders are identical, but here's what a typical configuration job looks like from start to finish.</p>
+    <div class="flow">
+      <div class="fstep"><div class="fdot">1</div><div class="fcontent"><div class="fhead">Receive the MO and pull the hardware</div><div class="fdesc">I get a Manufacturing Order &mdash; a printed job ticket with barcodes. It tells me what device, what customer, and exactly what needs to happen. I scan it into our inventory system (S2K) and physically pull the unit from the shelf.</div></div></div>
+      <div class="fstep"><div class="fdot">2</div><div class="fcontent"><div class="fhead">Physical inspection and verification</div><div class="fdesc">Unbox the unit. Check for physical damage. Verify the serial number on the device matches the box and the MO. These numbers must all agree &mdash; if they don't, work stops until it's resolved.</div></div></div>
+      <div class="fstep"><div class="fdot">3</div><div class="fcontent"><div class="fhead">BIOS configuration</div><div class="fdesc">Before installing anything, I go into the device's firmware (BIOS/UEFI) &mdash; the deepest layer of the computer, below the operating system. Here I configure hardware-level settings: storage mode, security chip, network settings, boot behavior, and the device's permanent ID (asset tag). Each customer has a specific checklist. Wrong settings here can cause failures later.</div></div></div>
+      <div class="fstep"><div class="fdot">4</div><div class="fcontent"><div class="fhead">Operating system imaging</div><div class="fdesc">I install a customized version of Windows configured specifically for that client. Depending on the engagement, this is done over the network &mdash; the computer downloads its operating system from our server &mdash; or via a dedicated USB drive. Either way, the process installs Windows, all drivers, and all required apps in one automated run.</div></div></div>
+      <div class="fstep"><div class="fdot">5</div><div class="fcontent"><div class="fhead">Post-image verification and documentation</div><div class="fdesc">Once imaging completes, I verify everything: check that all software installed correctly, verify hardware is recognized, update any drivers, and run client-specific checks &mdash; including certificate verification for clients with strict security enrollment requirements. I document results on the MO and sign off.</div></div></div>
+      <div class="fstep done"><div class="fdot">6</div><div class="fcontent"><div class="fhead">Close out in S2K and hand off</div><div class="fdesc">I close the Manufacturing Order in our ERP system, triggering a second technician to independently QC my work. Once both of us have signed off, the device is packaged and handed to the warehouse for shipment.</div></div></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="eyebrow">The skillset</div>
+    <h2 class="section-title">What I'm actually good at</h2>
+    <p class="section-body">This job requires a broad set of skills that sit at the intersection of IT, manufacturing, and quality control. Here's what I'm building expertise in.</p>
+    <div class="skills">
+      <div class="scard"><div class="sidx">01</div><div class="sname">Enterprise hardware configuration</div><div class="sdesc">Configuring BIOS/UEFI firmware settings on Dell laptops and desktops. Every setting has a purpose and a consequence &mdash; I know what each one does and why it's set a specific way for each customer.</div></div>
+      <div class="scard"><div class="sidx">02</div><div class="sname">OS deployment at scale</div><div class="sdesc">Deploying Windows operating systems using enterprise tools (SCCM, Autopilot). I work with network-based imaging, USB-based imaging, and cloud-based provisioning depending on the customer.</div></div>
+      <div class="scard"><div class="sidx">03</div><div class="sname">Quality &amp; compliance processes</div><div class="sdesc">Operating within a formal Quality Management System &mdash; following documented SOPs, performing two-tech QC checks, and maintaining paper audit trails that clients in regulated industries can inspect at any time.</div></div>
+      <div class="scard"><div class="sidx">04</div><div class="sname">Technical troubleshooting</div><div class="sdesc">When things go wrong (and they do), I diagnose issues using PowerShell scripts, Device Manager, disk management tools, and log files. Finding the root cause matters more than just restarting something.</div></div>
+      <div class="scard"><div class="sidx">05</div><div class="sname">Inventory and order management</div><div class="sdesc">Working in S2K (an enterprise ERP system) to track units, process inter-location transfers, pick orders, and close manufacturing orders. Every physical movement of hardware has a corresponding transaction.</div></div>
+      <div class="scard"><div class="sidx">06</div><div class="sname">Security and device identity</div><div class="sdesc">Managing security chips (TPM), device certificates, asset tags, and enrollment in enterprise management platforms. Each device needs a verifiable, cryptographic identity before it goes to the customer.</div></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="eyebrow">The tools and technology</div>
+    <h2 class="section-title">What I use every day</h2>
+    <p class="section-body">Most people think IT technicians just install Windows and call it a day. The technology involved is significantly more complex than that.</p>
+    <div class="tech">
+      <div class="trow"><div class="tlabel"><span>ERP System</span></div><div class="titems"><span class="tpill">S2K by Verde</span><span class="tpill">Manufacturing Orders</span><span class="tpill">Inventory management</span><span class="tpill">Location tracking</span></div></div>
+      <div class="trow"><div class="tlabel"><span>OS Deployment</span></div><div class="titems"><span class="tpill">SCCM / MECM</span><span class="tpill">Windows Autopilot</span><span class="tpill">MDT</span><span class="tpill">Client imaging portals</span><span class="tpill">USB boot media</span><span class="tpill">PXE network boot</span></div></div>
+      <div class="trow"><div class="tlabel"><span>Firmware</span></div><div class="titems"><span class="tpill">Dell BIOS / UEFI</span><span class="tpill">Dell Command | Configure</span><span class="tpill">Surface UEFI</span><span class="tpill">TPM management</span></div></div>
+      <div class="trow"><div class="tlabel"><span>Security</span></div><div class="titems"><span class="tpill">BitLocker</span><span class="tpill">PKI Certificates</span><span class="tpill">Active Directory</span><span class="tpill">Microsoft Intune</span><span class="tpill">Secure Boot</span><span class="tpill">GlobalProtect VPN</span></div></div>
+      <div class="trow"><div class="tlabel"><span>Scripting</span></div><div class="titems"><span class="tpill">PowerShell</span><span class="tpill">Command Prompt</span><span class="tpill">DiskPart</span><span class="tpill">Batch scripts</span><span class="tpill">Dell Command | Update</span></div></div>
+      <div class="trow"><div class="tlabel"><span>Compliance</span></div><div class="titems"><span class="tpill">CUI labeling (NIST 800-171)</span><span class="tpill">VPN domain enrollment</span><span class="tpill">Posture validation</span><span class="tpill">Multi-domain AD</span><span class="tpill">QMS document control</span></div></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="eyebrow">What makes it challenging</div>
+    <h2 class="section-title">Why this isn't just "plugging in computers"</h2>
+    <p class="section-body">The job looks simple from the outside, but the stakes and complexity are real.</p>
+    <div class="hard">
+      <div class="hcard"><div class="hnum">6+</div><div class="htitle">Customer playbooks</div><div class="hdesc">Every client has unique BIOS settings, software, naming conventions, and documentation requirements. Mixing them up means a rework &mdash; or a compliance failure.</div></div>
+      <div class="hcard stop"><div class="hnum">Zero</div><div class="htitle">Margin for error on identity</div><div class="hdesc">Serial numbers, asset tags, machine names, and certificates must match perfectly. If a device ships with the wrong identity into a regulated environment, it's a serious compliance problem.</div></div>
+      <div class="hcard"><div class="hnum">100%</div><div class="htitle">Audit trail required</div><div class="hdesc">Every step is documented. Procedures are version-controlled. Two technicians sign off on every job. This isn't optional &mdash; it's required by the compliance frameworks our clients operate under.</div></div>
+      <div class="hcard"><div class="hnum">138</div><div class="htitle">Pages of procedures to know</div><div class="hdesc">There's no room to guess. I follow precise documented procedures &mdash; but I also need to understand the underlying technology well enough to troubleshoot when things go wrong.</div></div>
+      <div class="hcard"><div class="hnum">~30</div><div class="htitle">Min bake time after imaging</div><div class="hdesc">After imaging, some devices need to sit and complete background processes before QC. Patience and process discipline are just as important as technical skill.</div></div>
+      <div class="hcard"><div class="hnum">24h</div><div class="htitle">SOP document expiry</div><div class="hdesc">Printed procedure documents expire in 24 hours. The controlled digital version is always the authority. This is how defense-grade document control works.</div></div>
+    </div>
+    <div class="pq"><p>The computers I configure end up in the hands of engineers who design aircraft and satellites. Getting the configuration wrong isn't just an inconvenience &mdash; it can delay critical programs.</p></div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="eyebrow">The bigger picture</div>
+    <h2 class="section-title">Where this fits in the world</h2>
+    <p class="section-body">FutureTech sits inside a specific niche of the IT industry called <strong>IT asset lifecycle management</strong> for the defense supply chain. Our clients operate in some of the most regulated environments in the world &mdash; aerospace, defense communications, federal systems integration &mdash; and they're under strict government regulations about how their IT equipment is sourced, configured, and documented. FutureTech exists specifically to handle this for them at scale.</p>
+    <p class="section-body" style="margin-top:16px">The computers I configure don't go to offices for spreadsheets and emails. They go to engineers running CAD simulations for aircraft, technicians operating radar systems, and analysts processing classified data. The configuration we apply &mdash; the firmware settings, the security chips, the certificates &mdash; isn't just IT hygiene. It's part of a security and compliance chain that ultimately traces back to government contracts.</p>
+    <p class="section-body" style="margin-top:16px">That's what makes this job different from typical IT support work. Every decision I make is documented, auditable, and tied to a customer's quality management system. I'm not just configuring computers. I'm part of a verified supply chain.</p>
+  </div>
+
+</div>
+<footer><span class="footer-name">DAVID GOMEZ &middot; FutureTech Enterprise &middot; Plano, TX</span><div class="footer-links"><a href="mailto:david@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a></div></footer>
+</body>
+</html>

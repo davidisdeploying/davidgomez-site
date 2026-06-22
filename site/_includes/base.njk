@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} &middot; David Gomez</title>
+<link rel="alternate" type="application/rss+xml" title="David Gomez — Devblog" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>{% raw %}
+
+:root{
+  --bg:#15110d;--bg2:#1d1812;--panel:#241d15;--line:#3a2e22;
+  --ink:#ece2d3;--ink2:#d6cbb8;--mut:#9c8b76;
+  --amber:#BA7517;--lit:#E2902A;--green:#46b06e;--cut:#bf463b;
+  --film:#0c0a07;--rebate:#1B1610;
+  --hd:'Fraunces',Georgia,serif;--bd:'Newsreader',Georgia,serif;--mo:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--bd);background:var(--bg);color:var(--ink2);font-size:16px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--amber);text-decoration:none}
+em{font-style:italic}
+::selection{background:rgba(186,117,23,.3);color:var(--ink)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;
+  padding:17px 40px;background:rgba(21,17,13,.85);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line)}
+.nav-logo{font-family:var(--hd);font-size:20px;font-weight:600;color:var(--ink);letter-spacing:.01em;
+  display:inline-flex;align-items:center;gap:9px}
+.nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 8px 1px rgba(226,144,42,.65)}
+.nav-links{display:flex;flex-wrap:wrap;gap:20px;list-style:none;align-items:center}
+.nav-links a{font-family:var(--mo);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--mut);transition:color .12s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--amber)}
+
+/* shared text bits */
+.eyebrow{font-family:var(--mo);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);
+  display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 9px 1px rgba(226,144,42,.6)}
+h1,h2,h3{font-family:var(--hd);font-weight:600;line-height:1.1;color:var(--ink)}
+.lead{font-family:var(--bd);font-size:18px;line-height:1.7;color:var(--mut)}
+
+/* SECTION head with hairline rule */
+.shead{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.shead .lbl{font-family:var(--mo);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);white-space:nowrap}
+.shead .rule{flex:1;height:1px;background:var(--line)}
+
+/* spec-plate (signature) */
+.plate{margin-top:34px;border:1px solid var(--line);border-radius:10px;
+  background:linear-gradient(#1c160e,#181109);display:flex;flex-wrap:wrap;overflow:hidden}
+.plate .cell{padding:13px 20px;border-right:1px solid var(--line);flex:1;min-width:150px}
+.plate .cell:last-child{border-right:none}
+.plate .k{font-family:var(--mo);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.plate .v{font-family:var(--mo);font-size:14px;color:var(--ink);margin-top:6px;display:flex;align-items:center;gap:7px}
+.plate .v .live{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px 1px rgba(70,176,110,.5)}
+.plate .v.lit{color:var(--lit)}
+
+/* buttons */
+.btn{font-family:var(--mo);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  background:#221b13;border:1px solid var(--line);border-radius:7px;color:var(--ink);padding:9px 16px;
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:border-color .12s,color .12s}
+.btn:hover{border-color:var(--amber);color:var(--lit)}
+
+/* footer */
+footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;display:flex;
+  justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:var(--bg2)}
+.footer-name{font-family:var(--mo);font-size:11px;letter-spacing:.04em;color:var(--mut)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-family:var(--mo);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--mut);transition:color .12s}
+.footer-links a:hover{color:var(--lit)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:640px){
+  nav{padding:16px 22px}.nav-links{gap:18px}
+  footer{padding:20px 22px;flex-direction:column;align-items:flex-start}
+}
+
+.phero{max-width:900px;margin:0 auto;padding:80px 40px 8px;width:100%}
+.phero .eyebrow{margin-bottom:20px}
+.phero h1{font-family:var(--hd);font-size:clamp(42px,6.5vw,68px);line-height:1.05;margin-bottom:22px}
+.phero h1 em{color:var(--lit)}
+.phero .lead{max-width:580px}
+.bloglist{max-width:760px;margin:0 auto;padding:40px 40px 80px;width:100%}
+.posts{display:flex;flex-direction:column}
+.pcard{display:block;padding:28px 0;border-bottom:1px solid var(--line);text-decoration:none;cursor:pointer}
+.pcard:first-child{padding-top:6px}
+.pcard:last-child{border-bottom:none}
+.pmeta{font-family:var(--mo);font-size:11px;letter-spacing:.04em;color:var(--mut);margin-bottom:10px}
+.ptitle{font-family:var(--hd);font-size:25px;color:var(--ink);margin-bottom:9px;transition:color .12s;line-height:1.2}
+.pcard:hover .ptitle{color:var(--lit)}
+.psum{font-family:var(--bd);font-size:15px;color:var(--mut);line-height:1.65}
+
+.postwrap{max-width:740px;margin:0 auto;padding:56px 40px 96px;width:100%}
+.backlink{font-family:var(--mo);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);
+  display:inline-flex;gap:8px;align-items:center;margin-bottom:30px;cursor:pointer}
+.backlink:hover{color:var(--lit)}
+.posthead{margin-bottom:34px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.postdate{font-family:var(--mo);font-size:11px;letter-spacing:.05em;color:var(--amber);margin-bottom:14px}
+.posttitle{font-family:var(--hd);font-size:clamp(32px,5vw,44px);line-height:1.1;color:var(--ink)}
+
+.post-body{font-family:var(--bd);font-size:17px;line-height:1.78;color:var(--ink2)}
+.post-body h1,.post-body h2,.post-body h3{font-family:var(--hd);color:var(--ink);line-height:1.2;margin:1.7em 0 .55em}
+.post-body h1{font-size:29px}.post-body h2{font-size:23px}.post-body h3{font-size:19px}
+.post-body p{margin:0 0 1.15em}
+.post-body a{color:var(--amber)}.post-body a:hover{color:var(--lit);text-decoration:underline}
+.post-body strong{color:var(--ink);font-weight:500}
+.post-body ul,.post-body ol{margin:0 0 1.15em;padding-left:1.4em}
+.post-body li{margin:.32em 0}
+.post-body blockquote{border-left:3px solid var(--amber);margin:1.3em 0;padding:.3em 1.2em;color:var(--mut);
+  font-style:italic;background:rgba(186,117,23,.05);border-radius:0 8px 8px 0}
+.post-body code{font-family:var(--mo);font-size:.85em;background:#1d1711;border:1px solid var(--line);
+  border-radius:5px;padding:.12em .42em;color:var(--lit)}
+.post-body pre{background:var(--film);border:1px solid var(--line);border-radius:10px;padding:18px 20px;
+  overflow:auto;margin:0 0 1.3em}
+.post-body pre code{background:none;border:none;padding:0;color:var(--ink2);font-size:13.5px;line-height:1.65}
+.post-body hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+.post-body img{max-width:100%;border-radius:8px}
+.post-body em{font-style:italic}
+@media(max-width:600px){.phero{padding:56px 22px 8px}.bloglist{padding:32px 22px 64px}.postwrap{padding:40px 22px 72px}}
+
+{% endraw %}</style>
+</head>
+<body>
+<nav><a href="/index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="/index.html">Home</a></li><li><a href="/work.html">Work</a></li><li><a href="/davidisdeploying.html">Projects</a></li><li><a href="/devblog.html" class="active">Devblog</a></li><li><a href="/resume.html">Résumé</a></li></ul></nav>
+{{ content | safe }}
+<footer><span class="footer-name">DAVID GOMEZ &middot; Plano, TX</span><div class="footer-links"><a href="mailto:david@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a></div></footer>
+</body>
+</html>

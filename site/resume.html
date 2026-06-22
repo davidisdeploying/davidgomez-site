@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Résumé &middot; David Gomez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#15110d;--bg2:#1d1812;--panel:#241d15;--line:#3a2e22;
+  --ink:#ece2d3;--ink2:#d6cbb8;--mut:#9c8b76;
+  --amber:#BA7517;--lit:#E2902A;--green:#46b06e;--cut:#bf463b;
+  --film:#0c0a07;--rebate:#1B1610;
+  --hd:'Fraunces',Georgia,serif;--bd:'Newsreader',Georgia,serif;--mo:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--bd);background:var(--bg);color:var(--ink2);font-size:16px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--amber);text-decoration:none}
+em{font-style:italic}
+::selection{background:rgba(186,117,23,.3);color:var(--ink)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;
+  padding:17px 40px;background:rgba(21,17,13,.85);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line)}
+.nav-logo{font-family:var(--hd);font-size:20px;font-weight:600;color:var(--ink);letter-spacing:.01em;
+  display:inline-flex;align-items:center;gap:9px}
+.nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 8px 1px rgba(226,144,42,.65)}
+.nav-links{display:flex;flex-wrap:wrap;gap:20px;list-style:none;align-items:center}
+.nav-links a{font-family:var(--mo);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--mut);transition:color .12s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--amber)}
+
+/* shared text bits */
+.eyebrow{font-family:var(--mo);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);
+  display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 9px 1px rgba(226,144,42,.6)}
+h1,h2,h3{font-family:var(--hd);font-weight:600;line-height:1.1;color:var(--ink)}
+.lead{font-family:var(--bd);font-size:18px;line-height:1.7;color:var(--mut)}
+
+/* SECTION head with hairline rule */
+.shead{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.shead .lbl{font-family:var(--mo);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);white-space:nowrap}
+.shead .rule{flex:1;height:1px;background:var(--line)}
+
+/* spec-plate (signature) */
+.plate{margin-top:34px;border:1px solid var(--line);border-radius:10px;
+  background:linear-gradient(#1c160e,#181109);display:flex;flex-wrap:wrap;overflow:hidden}
+.plate .cell{padding:13px 20px;border-right:1px solid var(--line);flex:1;min-width:150px}
+.plate .cell:last-child{border-right:none}
+.plate .k{font-family:var(--mo);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.plate .v{font-family:var(--mo);font-size:14px;color:var(--ink);margin-top:6px;display:flex;align-items:center;gap:7px}
+.plate .v .live{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px 1px rgba(70,176,110,.5)}
+.plate .v.lit{color:var(--lit)}
+
+/* buttons */
+.btn{font-family:var(--mo);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  background:#221b13;border:1px solid var(--line);border-radius:7px;color:var(--ink);padding:9px 16px;
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:border-color .12s,color .12s}
+.btn:hover{border-color:var(--amber);color:var(--lit)}
+
+/* footer */
+footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;display:flex;
+  justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:var(--bg2)}
+.footer-name{font-family:var(--mo);font-size:11px;letter-spacing:.04em;color:var(--mut)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-family:var(--mo);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--mut);transition:color .12s}
+.footer-links a:hover{color:var(--lit)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:640px){
+  nav{padding:16px 22px}.nav-links{gap:18px}
+  footer{padding:20px 22px;flex-direction:column;align-items:flex-start}
+}
+
+.page{max-width:880px;margin:0 auto;padding:64px 40px 96px;width:100%}
+.rhead{margin-bottom:52px;opacity:0;animation:fadeUp .5s ease .1s forwards}
+.rname{font-family:var(--hd);font-size:clamp(40px,6vw,58px);line-height:1.08;margin:16px 0 20px;color:var(--ink)}
+.rname em{color:var(--lit)}
+.rcontact{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:var(--mo);font-size:12.5px;color:var(--mut)}
+.rcontact a{color:var(--mut);transition:color .12s}
+.rcontact a:hover{color:var(--lit)}
+.cdot{width:3px;height:3px;background:var(--line);border-radius:50%;display:inline-block}
+nav .btn{padding:6px 14px}
+
+.rsection{margin-bottom:50px;opacity:0;animation:fadeUp .5s ease forwards}
+.rsection:nth-of-type(2){animation-delay:.2s}.rsection:nth-of-type(3){animation-delay:.28s}
+.rsection:nth-of-type(4){animation-delay:.34s}.rsection:nth-of-type(5){animation-delay:.4s}
+
+.entry{display:grid;grid-template-columns:1fr auto;gap:2px 24px;margin-bottom:34px;padding-bottom:34px;
+  border-bottom:1px solid var(--line)}
+.entry:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.etitle{font-family:var(--hd);font-size:20px;color:var(--ink);grid-column:1}
+.ecompany{font-family:var(--mo);font-size:13px;color:var(--ink2);grid-column:1;margin-top:2px}
+.eloc{font-family:var(--mo);font-size:11.5px;color:var(--mut);grid-column:1;margin-bottom:4px}
+.edate{font-family:var(--mo);font-size:11.5px;color:var(--mut);grid-column:2;grid-row:1/4;text-align:right;
+  white-space:nowrap;padding-top:5px}
+.ebullets{grid-column:1/-1;margin-top:13px;list-style:none;display:flex;flex-direction:column;gap:9px}
+.ebullets li{font-family:var(--bd);font-size:15px;color:var(--mut);line-height:1.6;padding-left:20px;position:relative}
+.ebullets li::before{content:'';position:absolute;left:0;top:11px;width:9px;height:1px;background:var(--amber)}
+.ebullets li strong{color:var(--ink2);font-weight:500}
+
+.edu{display:grid;grid-template-columns:1fr auto;gap:4px;margin-bottom:22px;padding-bottom:22px;
+  border-bottom:1px solid var(--line)}
+.edu:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.edeg{font-family:var(--hd);font-size:19px;color:var(--ink)}
+.esch{font-family:var(--mo);font-size:12.5px;color:var(--mut);margin-top:3px}
+.enote{font-family:var(--bd);font-style:italic;font-size:13px;color:var(--lit);margin-top:5px}
+.edudate{font-family:var(--mo);font-size:11.5px;color:var(--mut);text-align:right;padding-top:4px}
+
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-family:var(--mo);font-size:12px;color:var(--mut);background:#1d1711;border:1px solid var(--line);
+  border-radius:6px;padding:5px 12px}
+.skrows{display:flex;flex-direction:column;gap:16px}
+.skrow{display:grid;grid-template-columns:175px 1fr;gap:16px;align-items:start}
+.skcat{font-family:var(--mo);font-size:12px;letter-spacing:.04em;color:var(--lit);padding-top:6px;text-transform:uppercase}
+
+@media (max-width:640px){
+  .page{padding:44px 22px 72px}
+  .entry{grid-template-columns:1fr}.edate{grid-column:1;grid-row:auto;text-align:left;margin-bottom:8px}
+  .skrow{grid-template-columns:1fr;gap:8px}
+}
+@media print{
+  nav,footer,.btn{display:none!important}
+  body{background:#fff;color:#1f1c17;display:block}
+  .page{padding:24px;max-width:100%}
+  .rhead,.rsection{opacity:1;animation:none}
+  .rname{color:#1f1c17}.rname em,.skcat,.shead .lbl,.enote{color:#a23b1e}
+  .etitle,.edeg{color:#1f1c17}.ecompany,.ebullets li strong{color:#33302a}
+  .ecompany,.eloc,.edate,.esch,.edudate,.ebullets li,.rcontact,.rcontact a{color:#5b564d}
+  .shead .rule,.entry,.edu{border-color:#e2ddd3}
+  .pill{background:#f4f1ea;color:#3a362e;border-color:#ddd7cb}
+  .ebullets li::before{background:#a23b1e}
+  .eyebrow{color:#a23b1e}.eyebrow::before{background:#a23b1e;box-shadow:none}
+  a{color:#1f1c17}
+  .entry,.edu{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<nav><a href="index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="work.html">Work</a></li><li><a href="davidisdeploying.html">Projects</a></li><li><a href="devblog.html">Devblog</a></li><li><a href="resume.html" class="active">Résumé</a></li><li><a href="#" class="btn" onclick="window.print();return false;">Print / PDF</a></li></ul></nav>
+<div class="page">
+  <div class="rhead">
+    <div class="eyebrow">R&eacute;sum&eacute;</div>
+    <h1 class="rname">David <em>Gomez</em></h1>
+    <div class="rcontact">
+      <span>Richardson, TX</span><span class="cdot"></span>
+      <a href="tel:2149456136">(214) 945-6136</a><span class="cdot"></span>
+      <a href="mailto:career@davidgomez.cc">career@davidgomez.cc</a><span class="cdot"></span>
+      <a href="https://davidgomez.cc">davidgomez.cc</a>
+    </div>
+  </div>
+
+  <div class="rsection">
+    <div class="shead"><span class="lbl">Experience</span><div class="rule"></div></div>
+    <div class="entry">
+      <div class="etitle">Configuration Technician</div>
+      <div class="edate">Sep 2025 &ndash; Present</div>
+      <div class="ecompany">Future Tech Enterprise, Inc.</div>
+      <div class="eloc">Plano, TX</div>
+      <ul class="ebullets">
+        <li><strong>Imaging &amp; Deployment:</strong> Executed high-volume imaging of desktops, laptops, and tablets for Fortune 500 and government clients using SCCM/MDT, Windows Autopilot, PXE boot, and USB media.</li>
+        <li><strong>BIOS/UEFI Configuration:</strong> Manually and programmatically updated firmware settings including TPM enablement, Secure Boot configuration, and asset tag injection.</li>
+        <li><strong>Hardware Customization:</strong> Performed internal hardware upgrades on factory units while maintaining warranty integrity.</li>
+        <li><strong>Break/Fix:</strong> Managed the full break/fix lifecycle for used assets &mdash; repairing screens, chassis, and hinges to bring devices to Grade A condition for redeployment.</li>
+        <li><strong>Quality Assurance:</strong> Conducted White Glove visual inspections and functional testing to identify cosmetic defects or DOA hardware prior to shipping.</li>
+        <li><strong>Asset Management:</strong> Applied asset tags and security labels; scanned and logged serial numbers and service tags into the ERP/inventory system.</li>
+        <li><strong>Kitting &amp; Logistics:</strong> Assembled custom New Hire Kits bundling laptops with specific peripherals (docks, monitors, headsets, mice) for a premium out-of-the-box experience.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="etitle">Courier</div>
+      <div class="edate">Oct 2023 &ndash; Sep 2025</div>
+      <div class="ecompany">FedEx Express</div>
+      <div class="eloc">Sherman, TX</div>
+      <ul class="ebullets">
+        <li>Delivered packages and documents efficiently, ensuring timely arrivals and high customer satisfaction.</li>
+        <li>Conducted routine vehicle inspections for safety compliance and operational efficiency.</li>
+        <li>Managed route planning to optimize delivery times and reduce operational costs.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="etitle">Driver</div>
+      <div class="edate">Aug 2020 &ndash; Sep 2023</div>
+      <div class="ecompany">Uber</div>
+      <div class="eloc">Dallas&ndash;Fort Worth Metroplex, TX</div>
+      <ul class="ebullets">
+        <li>Maintained high customer satisfaction ratings providing safe and reliable transportation to a diverse client base.</li>
+        <li>Developed strong communication and problem-solving skills through high-volume daily client interactions.</li>
+        <li>Independently managed scheduling, routing, and vehicle upkeep to meet operational and company standards.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="etitle">IT Specialist / Inventory Control Manager</div>
+      <div class="edate">Aug 2012 &ndash; Jun 2020</div>
+      <div class="ecompany">Jet Specialty, Inc.</div>
+      <div class="eloc">Odessa, TX</div>
+      <ul class="ebullets">
+        <li>Managed inventory and logistics to ensure accurate stock levels and timely deliveries for an industrial oil &amp; gas supply company.</li>
+        <li>Coordinated with suppliers and vendors for timely restocking and optimal inventory management.</li>
+        <li>Conducted regular audits of inventory systems to identify discrepancies and implement corrective actions.</li>
+        <li>Utilized data analytics for inventory forecasting, reducing excess stock and improving cash flow.</li>
+        <li>Executed IT support tasks &mdash; software and hardware maintenance &mdash; to keep operations running efficiently.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rsection">
+    <div class="shead"><span class="lbl">Education</span><div class="rule"></div></div>
+    <div class="edu">
+      <div><div class="edeg">AAS in Cloud Computing</div><div class="esch">Collin College &middot; McKinney, TX</div><div class="enote">Currently enrolled &middot; AZ-104 Azure Administration focus</div></div>
+      <div class="edudate">Aug 2024 &ndash; Present</div>
+    </div>
+    <div class="edu">
+      <div><div class="edeg">High School Diploma</div><div class="esch">Permian High School &middot; Odessa, TX</div></div>
+      <div class="edudate">2007</div>
+    </div>
+  </div>
+
+  <div class="rsection">
+    <div class="shead"><span class="lbl">Certifications</span><div class="rule"></div></div>
+    <div class="pills">
+      <span class="pill">Cloud Infrastructure Technician &mdash; Collin College</span>
+      <span class="pill">AWS Cloud Fundamentals</span>
+    </div>
+  </div>
+
+  <div class="rsection">
+    <div class="shead"><span class="lbl">Skills &amp; Technologies</span><div class="rule"></div></div>
+    <div class="skrows">
+      <div class="skrow"><div class="skcat">OS Deployment</div><div class="pills"><span class="pill">SCCM / MDT</span><span class="pill">Windows Autopilot</span><span class="pill">PXE Boot</span><span class="pill">Microsoft Intune</span><span class="pill">Windows 10 / 11</span></div></div>
+      <div class="skrow"><div class="skcat">Firmware &amp; Hardware</div><div class="pills"><span class="pill">BIOS / UEFI</span><span class="pill">TPM</span><span class="pill">Secure Boot</span><span class="pill">Laptop Teardown</span><span class="pill">Component Replacement</span><span class="pill">Break / Fix</span><span class="pill">Hardware Stress Testing</span></div></div>
+      <div class="skrow"><div class="skcat">IT Operations</div><div class="pills"><span class="pill">System Imaging</span><span class="pill">Image Verification &amp; QC</span><span class="pill">DOA Inspection</span><span class="pill">Asset Tagging</span><span class="pill">Peripheral Kitting</span><span class="pill">Data Sanitization</span><span class="pill">SLA Compliance</span><span class="pill">Root Cause Analysis</span><span class="pill">High-Volume Production</span></div></div>
+      <div class="skrow"><div class="skcat">Cloud &amp; Virtualization</div><div class="pills"><span class="pill">Microsoft Azure</span><span class="pill">AWS</span><span class="pill">VMware / Hyper-V</span><span class="pill">Docker</span><span class="pill">Podman</span></div></div>
+      <div class="skrow"><div class="skcat">Systems &amp; Scripting</div><div class="pills"><span class="pill">Active Directory</span><span class="pill">Python</span><span class="pill">Linux</span><span class="pill">Inventory Control</span></div></div>
+    </div>
+  </div>
+</div>
+<footer><span class="footer-name">DAVID GOMEZ &middot; Richardson, TX</span><div class="footer-links"><a href="mailto:david@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a></div></footer>
+</body>
+</html>
