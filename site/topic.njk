@@ -1,0 +1,26 @@
+---
+pagination:
+  data: collections.topics
+  size: 1
+  alias: t
+permalink: "/devblog/topic/{{ t.slug }}.html"
+layout: base.njk
+eleventyComputed:
+  title: "{{ t.topic }} — Topic"
+---
+<div class="postwrap">
+  <a class="backlink" href="/devblog.html">&larr; All posts</a>
+  <div class="posthead">
+    <div class="postdate">Topic &middot; {{ t.count }} post{% if t.count != 1 %}s{% endif %}</div>
+    <h1 class="posttitle">{{ t.topic }}</h1>
+  </div>
+  <div class="posts">
+  {%- for post in t.posts | reverse %}
+    <a class="pcard" href="{{ post.url }}">
+      <div class="pmeta">{{ post.data.date | readable }}</div>
+      <div class="ptitle">{{ post.data.title }}</div>
+      <div class="psum">{{ post.data.summary }}</div>
+    </a>
+  {%- endfor %}
+  </div>
+</div>

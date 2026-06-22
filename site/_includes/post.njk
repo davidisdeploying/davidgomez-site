@@ -4,8 +4,11 @@ layout: base.njk
 <div class="postwrap">
   <a class="backlink" href="/devblog.html">&larr; All posts</a>
   <div class="posthead">
-    <div class="postdate">{{ date | readable }}{% for t in topics %} &middot; {{ t }}{% endfor %}</div>
+    <div class="postdate">{{ date | readable }}</div>
     <h1 class="posttitle">{{ title }}</h1>
+    {%- if topics %}
+    <div class="topics">{% for t in topics %}<a href="/devblog/topic/{{ t | topicSlug }}.html">{{ t }}</a>{% endfor %}</div>
+    {%- endif %}
   </div>
   <article class="post-body">{{ content | safe }}</article>
 </div>

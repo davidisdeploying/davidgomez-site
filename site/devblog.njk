@@ -9,12 +9,19 @@ permalink: /devblog.html
     <h1>Working <em>notes</em></h1>
     <p class="lead">Near-daily notes on building Loupe, side projects, and whatever I'm learning across tech, the cloud, and getting better at the craft &mdash; drawn from the build log I keep as I go.</p>
   </div>
+  {%- if collections.topics | length %}
+  <div class="topiccloud">
+    <div class="shead"><span class="lbl">Topics</span><span class="rule"></span><a class="maplink" href="/stack.html">Stack map &rarr;</a></div>
+    <div class="topics">{% for t in collections.topics %}<a href="/devblog/topic/{{ t.slug }}.html">{{ t.topic }}<span class="ct">{{ t.count }}</span></a>{% endfor %}</div>
+  </div>
+  {%- endif %}
   <div class="bloglist"><div class="posts">
   {%- for post in collections.post | reverse %}
     <a class="pcard" href="{{ post.url }}">
-      <div class="pmeta">{{ post.data.date | readable }}{% for t in post.data.topics %} &middot; {{ t }}{% endfor %}</div>
+      <div class="pmeta">{{ post.data.date | readable }}</div>
       <div class="ptitle">{{ post.data.title }}</div>
       <div class="psum">{{ post.data.summary }}</div>
+      {%- if post.data.topics %}<div class="topics">{% for t in post.data.topics %}<span>{{ t }}</span>{% endfor %}</div>{% endif %}
     </a>
   {%- endfor %}
   </div></div>
