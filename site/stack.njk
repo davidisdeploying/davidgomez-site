@@ -7,25 +7,21 @@ permalink: /stack.html
   <div class="phero">
     <div class="eyebrow">Stack</div>
     <h1>Everything I've <em>touched</em></h1>
-    <p class="lead">Every technology, tool, and idea that turns up in the build log &mdash; each bubble sized by how often it comes up. Bigger means more. Drawn straight from the devblog, so it grows as I write. Tap one to read the posts behind it.</p>
+    <p class="lead">Every technology, tool, and idea that turns up in the build log, each bubble sized by how often it comes up. Bigger means more. Drawn straight from the devblog, so it grows as I write. Tap one to read the posts behind it.</p>
   </div>
   <div class="bubblewrap">
   {%- if collections.topicmap.nodes | length %}
     <svg class="bubbles" viewBox="0 0 {{ collections.topicmap.w }} {{ collections.topicmap.h }}" role="img" aria-label="Topics sized by frequency">
       <defs>
-        <radialGradient id="orb" cx="48%" cy="40%" r="65%">
-          <stop offset="0%" stop-color="#E2902A" stop-opacity="0.96"/>
-          <stop offset="58%" stop-color="#BA7517" stop-opacity="0.6"/>
-          <stop offset="100%" stop-color="#BA7517" stop-opacity="0.12"/>
+        <radialGradient id="orb" cx="48%" cy="40%" r="68%">
+          <stop offset="0%" stop-color="#ef5a45"/>
+          <stop offset="62%" stop-color="#e5331c"/>
+          <stop offset="100%" stop-color="#c32a14"/>
         </radialGradient>
-        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="5" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
       </defs>
       {%- for n in collections.topicmap.nodes %}
-      <a href="/devblog/topic/{{ n.slug }}.html" class="orb"><title>{{ n.topic }} &mdash; {{ n.count }} post{% if n.count != 1 %}s{% endif %}</title>
-        <circle cx="{{ n.x }}" cy="{{ n.y }}" r="{{ n.r }}" fill="url(#orb)" filter="url(#glow)"/>
+      <a href="/devblog/topic/{{ n.slug }}.html" class="orb"><title>{{ n.topic }} - {{ n.count }} post{% if n.count != 1 %}s{% endif %}</title>
+        <circle cx="{{ n.x }}" cy="{{ n.y }}" r="{{ n.r }}" fill="url(#orb)"/>
         <text class="cnt" x="{{ n.x }}" y="{{ n.cyCount }}" style="font-size:{{ n.cfont }}px">{{ n.count }}</text>
         {%- if n.showLabel %}<text class="lbl" x="{{ n.x }}" y="{{ n.cyLabel }}" style="font-size:{{ n.lfont }}px">{{ n.topic }}</text>{% endif %}
       </a>
@@ -33,7 +29,7 @@ permalink: /stack.html
     </svg>
     <div class="topics blist">{% for t in collections.topics %}<a href="/devblog/topic/{{ t.slug }}.html">{{ t.topic }}<span class="ct">{{ t.count }}</span></a>{% endfor %}</div>
   {%- else %}
-    <p class="lead" style="max-width:560px">Nothing here yet &mdash; topics appear as posts go live.</p>
+    <p class="lead" style="max-width:560px">Nothing here yet. Topics appear as posts go live.</p>
   {%- endif %}
   </div>
 </main>
