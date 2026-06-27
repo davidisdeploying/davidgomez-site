@@ -1,29 +1,29 @@
 ---
-title: "June 15 — the 462 GB move that took 0.09 seconds, and two review tools"
+title: "June 15: the 462 GB move that took 0.09 seconds, and two review tools"
 date: 2026-06-15
 topics: ["SMB", "rclone", "Backups", "SQLite", "Web UI", "FFmpeg", "Concurrency"]
 summary: "A long day: turning a 462 GB copy into an instant rename by understanding the filesystem, catching two backup processes about to trample each other, and building two browser tools to actually review ~91,000 photos without ever deleting one by accident."
 ---
 
-This was a four-arc day — a storage trick that saved hours, a backup that nearly tripped over itself, and two interactive review tools. The throughline: do the irreversible things slowly and the reversible things fast.
+This was a four-arc day: a storage trick that saved hours, a backup that nearly tripped over itself, and two interactive review tools. The throughline: do the irreversible things slowly and the reversible things fast.
 
 ## The move that moved nothing
 
-I needed to relocate ~150 large videos — about **462 GB** — from one folder to another. The obvious copy-and-verify approach was a 12–18 hour job at the share's throughput. Then I noticed both folders live on the *same* underlying volume, which means a move is just a rename — zero bytes travel.
+I needed to relocate ~150 large videos (about **462 GB**) from one folder to another. The obvious copy-and-verify approach was a 12-18 hour job at the share's throughput. Then I noticed both folders live on the *same* underlying volume, which means a move is just a rename: zero bytes travel.
 
 The risk is that a "move" silently degrades into a slow full copy across a device boundary and you don't notice until hours in. So I proved it first. `os.rename` raises an error on a cross-device move rather than quietly copying, which makes it a perfect instant-or-fail probe: I ran it on the single largest file (~22 GB) and timed it at **0.092 seconds**. A real copy would've taken over an hour. That sub-second result is definitive proof it was a true server-side rename, not a copy. (`shutil.move` would have hidden the fallback; `os.rename` is the one to reach for when you specifically want to *prove* no bytes moved.)
 
-Then the whole set renamed in about three seconds, and I repointed the database paths in a single guarded transaction — set to roll back unless *exactly* the expected number of rows changed, with a verified snapshot taken first. This was the one genuinely irreversible step of the day (the originals get destroyed), so it got the proof, the snapshot, and the row-count guard. Hours to seconds, with a rollback in my pocket.
+Then the whole set renamed in about three seconds, and I repointed the database paths in a single guarded transaction, set to roll back unless *exactly* the expected number of rows changed, with a verified snapshot taken first. This was the one genuinely irreversible step of the day (the originals get destroyed), so it got the proof, the snapshot, and the row-count guard. Hours to seconds, with a rollback in my pocket.
 
 ## A backup that almost trampled itself
 
-I set up an off-site backup of the large work-product video folders to cloud storage. Babysitting the transfer, I caught a real hazard: **two copy processes were running against the same destination at once** — the intended one plus an accidental second launch. That's dangerous for two reasons: the destination allows multiple files with the same name in one folder (so you can get silent duplicates), and it double-spends the daily upload quota. Worse, the obvious verification — a one-way check — is *structurally blind* to duplicates, because it only flags files that are *missing*, never extras.
+I set up an off-site backup of the large work-product video folders to cloud storage. Babysitting the transfer, I caught a real hazard: **two copy processes were running against the same destination at once**: the intended one plus an accidental second launch. That's dangerous for two reasons: the destination allows multiple files with the same name in one folder (so you can get silent duplicates), and it double-spends the daily upload quota. Worse, the obvious verification (a one-way check) is *structurally blind* to duplicates, because it only flags files that are *missing*, never extras.
 
-So I killed the duplicate and replaced hand-babysitting with an orchestrator: wait for the live copy to finish, idempotently re-run to guarantee completion (the copy tool skips already-uploaded files), run the second folder strictly afterward, and verify at the end — with cause-aware backoff (long pause on a quota hit, short pause on a transient error). The headless OAuth setup had the usual sharp edges, the kind where the consent screen and actually enabling the API are two separate steps you both have to get right.
+So I killed the duplicate and replaced hand-babysitting with an orchestrator: wait for the live copy to finish, idempotently re-run to guarantee completion (the copy tool skips already-uploaded files), run the second folder strictly afterward, and verify at the end, with cause-aware backoff (long pause on a quota hit, short pause on a transient error). The headless OAuth setup had the usual sharp edges, the kind where the consent screen and actually enabling the API are two separate steps you both have to get right.
 
 ## Two review tools
 
-With candidates and protected sets sorted, I needed to actually *decide*. So I built an interactive browser tool: stdlib-only, decisions written to a *separate* database, three states (keep / cut / undecided), and — the part I care most about — **nothing is ever deleted.** A "cut" only adds an ID to an exported list. I reorganized it from a rule-bucket grid into a time-based view (month → week → day) with a swipe-to-decide focus mode and a warm "darkroom" skin, leading each item with *when and where* it was taken, because for personal photos that's the real keep/cut anchor. Full-resolution originals stay on my home network; only thumbnails go over the public path.
+With candidates and protected sets sorted, I needed to actually *decide*. So I built an interactive browser tool: stdlib-only, decisions written to a *separate* database, three states (keep / cut / undecided), and, the part I care most about, **nothing is ever deleted.** A "cut" only adds an ID to an exported list. I reorganized it from a rule-bucket grid into a time-based view (month → week → day) with a swipe-to-decide focus mode and a warm "darkroom" skin, leading each item with *when and where* it was taken, because for personal photos that's the real keep/cut anchor. Full-resolution originals stay on my home network; only thumbnails go over the public path.
 
 Then a sibling tool for reviewing the *entire* library day by day. The key adaptation for ~91,000 items is a **"mark the rest of this day kept"** sweep: you swipe-cut the few you want gone, then one tap closes the day. Thumbnails generate on demand as you open each day (no pre-rendering 91k of them) into a shared cache, so overlapping items are free.
 
@@ -35,5 +35,5 @@ Then a sibling tool for reviewing the *entire* library day by day. The key adapt
 ## Learned
 
 - A move within one volume is a metadata-only rename. Prove it with the call that *fails* on a cross-device move instead of one that silently copies.
-- Idempotent transfer tools make "re-run to resume" safe — but never run two against one destination; the one-way verify can't see the duplicates that creates.
+- Idempotent transfer tools make "re-run to resume" safe, but never run two against one destination; the one-way verify can't see the duplicates that creates.
 - Guard irreversible database writes with a row-count check and a fresh snapshot. Make the easy thing fast and the dangerous thing slow.
