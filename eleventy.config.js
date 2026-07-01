@@ -57,7 +57,6 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ ["site/" + f]: f })
   );
   eleventyConfig.addPassthroughCopy({ "site/swiss.css": "swiss.css" });
-  eleventyConfig.addPassthroughCopy({ "site/swiss.js": "swiss.js" });
   return {
     dir: { input: "site", includes: "_includes", output: "_site" },
     htmlTemplateEngine: false,
