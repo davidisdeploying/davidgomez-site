@@ -7,7 +7,7 @@ permalink: "/index.html"
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>David Gomez</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 {%- set ogTitle = title or site.name %}
 {%- set ogDesc = description or site.description %}
 {%- set ogImage = site.url + (image or "/og.png") %}
@@ -26,54 +26,216 @@ permalink: "/index.html"
 <meta name="twitter:image" content="{{ ogImage }}">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/swiss.css">
+<style>
+:root{
+  --bg:#15110d;--bg2:#1d1812;--panel:#241d15;--line:#3a2e22;
+  --ink:#ece2d3;--ink2:#d6cbb8;--mut:#9c8b76;
+  --amber:#BA7517;--lit:#E2902A;--green:#46b06e;--cut:#bf463b;
+  --film:#0c0a07;--rebate:#1B1610;
+  --hd:'Fraunces',Georgia,serif;--bd:'Newsreader',Georgia,serif;--mo:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--bd);background:var(--bg);color:var(--ink2);font-size:16px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--amber);text-decoration:none}
+em{font-style:italic}
+::selection{background:rgba(186,117,23,.3);color:var(--ink)}
+
+nav{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;
+  padding:17px 40px;background:rgba(21,17,13,.85);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line)}
+.nav-logo{font-family:var(--hd);font-size:20px;font-weight:600;color:var(--ink);letter-spacing:.01em;
+  display:inline-flex;align-items:center;gap:9px}
+.nav-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 8px 1px rgba(226,144,42,.65)}
+.nav-links{display:flex;flex-wrap:wrap;gap:20px;list-style:none;align-items:center}
+.nav-links a{font-family:var(--mo);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--mut);transition:color .12s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--amber)}
+
+.eyebrow{font-family:var(--mo);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);
+  display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 9px 1px rgba(226,144,42,.6)}
+h1,h2,h3{font-family:var(--hd);font-weight:600;line-height:1.1;color:var(--ink)}
+.lead{font-family:var(--bd);font-size:18px;line-height:1.7;color:var(--mut)}
+
+.shead{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.shead .lbl{font-family:var(--mo);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);white-space:nowrap}
+.shead .rule{flex:1;height:1px;background:var(--line)}
+
+.plate{margin-top:34px;border:1px solid var(--line);border-radius:10px;
+  background:linear-gradient(#1c160e,#181109);display:flex;flex-wrap:wrap;overflow:hidden}
+.plate .cell{padding:13px 20px;border-right:1px solid var(--line);flex:1;min-width:150px}
+.plate .cell:last-child{border-right:none}
+.plate .k{font-family:var(--mo);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.plate .v{font-family:var(--mo);font-size:14px;color:var(--ink);margin-top:6px;display:flex;align-items:center;gap:7px}
+.plate .v .live{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px 1px rgba(70,176,110,.5)}
+.plate .v.lit{color:var(--lit)}
+
+footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;display:flex;
+  justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:var(--bg2)}
+.footer-name{font-family:var(--mo);font-size:11px;letter-spacing:.04em;color:var(--mut)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-family:var(--mo);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--mut);transition:color .12s}
+.footer-links a:hover{color:var(--lit)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:640px){
+  nav{flex-direction:column;align-items:flex-start;gap:13px;padding:14px 20px}
+  .nav-links{width:100%;gap:10px 16px;justify-content:flex-start}
+  .nav-links a{font-size:11.5px}
+  footer{padding:20px 22px;flex-direction:column;align-items:flex-start}
+}
+
+.home{flex:1;max-width:900px;margin:0 auto;padding:84px 40px 80px;width:100%}
+.home .eyebrow{margin-bottom:22px;opacity:0;animation:fadeUp .6s ease .1s forwards}
+.hero-title{font-family:var(--hd);font-size:clamp(46px,7vw,78px);line-height:1.05;margin-bottom:26px;
+  opacity:0;animation:fadeUp .6s ease .2s forwards}
+.hero-title em{color:var(--lit)}
+.hero-sub{font-family:var(--bd);font-size:18px;color:var(--mut);max-width:560px;line-height:1.7;
+  margin-bottom:8px;opacity:0;animation:fadeUp .6s ease .3s forwards}
+.home .plate{opacity:0;animation:fadeUp .6s ease .4s forwards}
+
+.tilehead{margin-top:60px;opacity:0;animation:fadeUp .6s ease .5s forwards}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;
+  opacity:0;animation:fadeUp .6s ease .56s forwards}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 28px;
+  display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;min-height:226px;
+  box-shadow:inset 0 0 0 1px rgba(233,228,214,.035);
+  transition:border-color .12s,transform .12s,box-shadow .12s}
+.tile::before{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--amber);
+  transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.tile:hover{border-color:var(--amber);transform:translateY(-2px);box-shadow:0 14px 34px -18px rgba(0,0,0,.7)}
+.tile:hover::before{transform:scaleX(1)}
+.tile-tag{font-family:var(--mo);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.tile-title{font-family:var(--hd);font-size:25px;line-height:1.2;color:var(--ink)}
+.tile-desc{font-family:var(--bd);font-size:14px;color:var(--mut);line-height:1.6;flex:1}
+.tile-arrow{font-family:var(--mo);font-size:18px;color:var(--line);align-self:flex-end;margin-top:8px;
+  transition:color .2s,transform .2s}
+.tile:hover .tile-arrow{color:var(--lit);transform:translate(3px,-3px)}
+@media (min-width:680px){.tile{aspect-ratio:1/1;min-height:0}}
+.tile-loupe{justify-content:flex-start}
+.loupemark{margin:8px 0 2px}
+.loupemark svg{width:100%;height:auto;max-width:248px;display:block;border-radius:10px;box-shadow:0 0 0 1px var(--line)}
+
+.homemap{margin-top:64px;opacity:0;animation:fadeUp .6s ease .62s forwards}
+.maplink{font-family:var(--mo);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);white-space:nowrap;transition:color .12s}
+.maplink:hover{color:var(--lit)}
+.bubblewrap{max-width:760px;margin:6px auto 0;width:100%}
+.bubbles{width:100%;height:auto;display:block;overflow:visible}
+.bubbles .orb{cursor:pointer}
+.bubbles circle{transition:opacity .15s}
+.bubbles .orb:hover circle{opacity:.82}
+.bubbles .cnt{font-family:var(--mo);font-weight:500;fill:#15110d;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.bubbles .lbl{font-family:var(--mo);fill:#1f1710;text-anchor:middle;dominant-baseline:central;pointer-events:none;letter-spacing:.02em}
+
+@media (max-width:600px){.home{padding:56px 22px 56px}}
+</style>
 </head>
 <body>
-<nav><a href="index.html" class="nav-logo">DG<span class="dot"></span></a><ul class="nav-links"><li><a href="index.html" class="active">Home</a></li><li><a href="work.html">Work</a></li><li><a href="davidisdeploying.html">Projects</a></li><li><a href="devblog.html">Devblog</a></li><li><a href="stack.html">Stack</a></li><li><a href="resume.html">Résumé</a></li></ul></nav>
-<main class="wrap">
+<nav><a href="index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="index.html" class="active">Home</a></li><li><a href="work.html">Work</a></li><li><a href="davidisdeploying.html">Projects</a></li><li><a href="devblog.html">Devblog</a></li><li><a href="stack.html">Stack</a></li><li><a href="resume.html">Résumé</a></li></ul></nav>
+<main class="home">
+  <div class="eyebrow">davidgomez.cc</div>
+  <h1 class="hero-title">Hi, I'm<br><em>David Gomez.</em></h1>
+  <p class="hero-sub">Configuration Technician working at the intersection of enterprise IT, hardware deployment, and the defense supply chain. Based in Plano, TX.</p>
 
-  <div class="mast"><span>davidgomez.cc</span><span>Plano, TX &middot; 2026</span></div>
+  <div class="plate">
+    <div class="cell"><div class="k">Role</div><div class="v">Configuration Technician</div></div>
+    <div class="cell"><div class="k">Sector</div><div class="v">Defense IT Supply Chain</div></div>
+    <div class="cell"><div class="k">Based</div><div class="v">Plano, TX</div></div>
+    <div class="cell"><div class="k">Status</div><div class="v lit"><span class="live"></span>In service</div></div>
+  </div>
 
-  <section class="hero">
-    <h1 class="hugename reveal"><span style="animation-delay:.05s">David</span><span class="dot" style="animation-delay:.16s">Gomez.</span></h1>
-    <div class="herorow">
-      <p class="role">Configuration Technician working where enterprise IT, hardware, and the <b>defense supply chain</b> meet.</p>
-      <div class="meta">
-        <div><span class="k">Role</span><span class="v">Config Technician</span></div>
-        <div><span class="k">Sector</span><span class="v">Defense IT</span></div>
-        <div><span class="k">Based</span><span class="v">Plano, TX</span></div>
-        <div><span class="k">Status</span><span class="v live">In service</span></div>
+  <div class="shead tilehead"><span class="lbl">Around here</span><span class="rule"></span></div>
+  <div class="tiles">
+    <a href="work.html" class="tile">
+      <span class="tile-tag">Deep dive</span>
+      <div class="tile-title">Work</div>
+      <p class="tile-desc">What I do configuring enterprise hardware for some of the most security-conscious organizations in the world.</p>
+      <span class="tile-arrow">&#8599;</span>
+    </a>
+    <a href="davidisdeploying.html" class="tile">
+      <span class="tile-tag">Builds</span>
+      <div class="tile-title">Projects</div>
+      <p class="tile-desc">Things I've shipped &mdash; Loupe, Tandem, this site &mdash; with the stack behind each.</p>
+      <span class="tile-arrow">&#8599;</span>
+    </a>
+    <a href="devblog.html" class="tile">
+      <span class="tile-tag">Working notes</span>
+      <div class="tile-title">Devblog</div>
+      <p class="tile-desc">Near-daily build logs: what got made, what broke, and what I learned fixing it.</p>
+      <span class="tile-arrow">&#8599;</span>
+    </a>
+    <a href="/stack.html" class="tile">
+      <span class="tile-tag">The map</span>
+      <div class="tile-title">Stack</div>
+      <p class="tile-desc">Every technology and idea I've touched, sized by how often it comes up.</p>
+      <span class="tile-arrow">&#8599;</span>
+    </a>
+    <a href="resume.html" class="tile">
+      <span class="tile-tag">Background</span>
+      <div class="tile-title">R&eacute;sum&eacute;</div>
+      <p class="tile-desc">Full work history, skills, and education &mdash; logistics and IT support to hardware deployment.</p>
+      <span class="tile-arrow">&#8599;</span>
+    </a>
+    <a href="https://loupeculling.com" class="tile tile-loupe" target="_blank" rel="noopener">
+      <span class="tile-tag">Coming soon</span>
+      <div class="loupemark">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 8 226 96" role="img" aria-label="Loupe">
+          <defs><style><![CDATA[@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&display=swap');]]></style></defs>
+          <rect x="-8" y="8" width="226" height="96" rx="12" fill="#14110C"/>
+          <rect x="14" y="72" width="182" height="22" rx="3" fill="#1B1610" stroke="#3A3024" stroke-width="1.2"/>
+          <rect x="57.65" y="72" width="36" height="22" fill="#BA7517" fill-opacity="0.24"/>
+          <rect x="57.65" y="72" width="36" height="22" fill="none" stroke="#BA7517" stroke-width="1.4" stroke-opacity="0.85"/>
+          <g stroke="#3A3024" stroke-width="1.2"><line x1="57.65" y1="72" x2="57.65" y2="94"/><line x1="93.65" y1="72" x2="93.65" y2="94"/><line x1="120" y1="72" x2="120" y2="94"/><line x1="156" y1="72" x2="156" y2="94"/></g>
+          <g fill="#5E5240"><rect x="20" y="74.5" width="6" height="3.2" rx="1"/><rect x="34" y="74.5" width="6" height="3.2" rx="1"/><rect x="48" y="74.5" width="6" height="3.2" rx="1"/><rect x="62" y="74.5" width="6" height="3.2" rx="1"/><rect x="76" y="74.5" width="6" height="3.2" rx="1"/><rect x="90" y="74.5" width="6" height="3.2" rx="1"/><rect x="104" y="74.5" width="6" height="3.2" rx="1"/><rect x="118" y="74.5" width="6" height="3.2" rx="1"/><rect x="132" y="74.5" width="6" height="3.2" rx="1"/><rect x="146" y="74.5" width="6" height="3.2" rx="1"/><rect x="160" y="74.5" width="6" height="3.2" rx="1"/><rect x="174" y="74.5" width="6" height="3.2" rx="1"/><rect x="188" y="74.5" width="6" height="3.2" rx="1"/>
+          <rect x="20" y="87.3" width="6" height="3.2" rx="1"/><rect x="34" y="87.3" width="6" height="3.2" rx="1"/><rect x="48" y="87.3" width="6" height="3.2" rx="1"/><rect x="62" y="87.3" width="6" height="3.2" rx="1"/><rect x="76" y="87.3" width="6" height="3.2" rx="1"/><rect x="90" y="87.3" width="6" height="3.2" rx="1"/><rect x="104" y="87.3" width="6" height="3.2" rx="1"/><rect x="118" y="87.3" width="6" height="3.2" rx="1"/><rect x="132" y="87.3" width="6" height="3.2" rx="1"/><rect x="146" y="87.3" width="6" height="3.2" rx="1"/><rect x="160" y="87.3" width="6" height="3.2" rx="1"/><rect x="174" y="87.3" width="6" height="3.2" rx="1"/><rect x="188" y="87.3" width="6" height="3.2" rx="1"/></g>
+          <path d="M64.65 60 L57.65 72 L93.65 72 L86.65 60 Z" fill="#E9E4D6" fill-opacity="0.07"/>
+          <line x1="64.65" y1="60" x2="57.65" y2="72" stroke="#EFE9DA" stroke-width="1.3" stroke-opacity="0.6"/>
+          <line x1="86.65" y1="60" x2="93.65" y2="72" stroke="#EFE9DA" stroke-width="1.3" stroke-opacity="0.6"/>
+          <text x="18" y="66" font-family="Fraunces,Georgia,serif" font-weight="500" font-size="62" fill="#E6E2D5">L</text>
+          <text x="96" y="66" font-family="Fraunces,Georgia,serif" font-weight="500" font-size="62" fill="#E6E2D5">upe</text>
+          <g>
+            <line x1="60.65" y1="46" x2="60.65" y2="56" stroke="#BA7517" stroke-width="5"/>
+            <line x1="90.65" y1="46" x2="90.65" y2="56" stroke="#BA7517" stroke-width="5"/>
+            <ellipse cx="75.65" cy="56" rx="15" ry="7" fill="none" stroke="#BA7517" stroke-width="5"/>
+            <ellipse cx="75.65" cy="46" rx="15" ry="7" fill="#14110C"/>
+            <ellipse cx="75.65" cy="46" rx="15" ry="7" fill="#BA7517" fill-opacity="0.14"/>
+            <ellipse cx="75.65" cy="46" rx="15" ry="7" fill="none" stroke="#BA7517" stroke-width="5"/>
+            <path d="M64.65 44 Q69.65 40 77.65 41.5" fill="none" stroke="#FBF6EA" stroke-width="2.2" stroke-opacity="0.72" stroke-linecap="round"/>
+          </g>
+        </svg>
       </div>
-    </div>
-  </section>
-
-  <section class="indexsec">
-    <h2>Index</h2>
-    <div class="idx">
-      <a href="work.html" class="ent"><span class="no">01</span><span class="body"><span class="nm">Work</span><span class="ds">Configuring enterprise hardware for the security-conscious.</span></span><span class="ar">&#8599;</span></a>
-      <a href="davidisdeploying.html" class="ent"><span class="no">02</span><span class="body"><span class="nm">Projects</span><span class="ds">Loupe, Tandem, this site, and the stack behind each.</span></span><span class="ar">&#8599;</span></a>
-      <a href="devblog.html" class="ent"><span class="no">03</span><span class="body"><span class="nm">Devblog</span><span class="ds">Near-daily logs: what got made, what broke, what I learned.</span></span><span class="ar">&#8599;</span></a>
-      <a href="/stack.html" class="ent"><span class="no">04</span><span class="body"><span class="nm">Stack</span><span class="ds">Every technology I've touched, sized by how often it comes up.</span></span><span class="ar">&#8599;</span></a>
-      <a href="resume.html" class="ent"><span class="no">05</span><span class="body"><span class="nm">R&eacute;sum&eacute;</span><span class="ds">Work history, skills, and education in full.</span></span><span class="ar">&#8599;</span></a>
-      <a href="https://loupeculling.com" class="ent" target="_blank" rel="noopener"><span class="no">06</span><span class="body"><span class="nm">Loupe</span><span class="ds">The self-hosted photo culler I'm building. Look, cull, loop.</span></span><span class="ar">&#8599;</span></a>
-    </div>
-  </section>
+      <p class="tile-desc">The self-hosted photo culler I'm building &mdash; look &middot; cull &middot; loop.</p>
+      <span class="tile-arrow">&#8599;</span>
+    </a>
+  </div>
 
   {%- if collections.topicmap.nodes | length %}
   <section class="homemap">
-    <div class="top"><h2>Everything I've touched</h2><a class="maplink" href="/stack.html">Full map &rarr;</a></div>
+    <div class="shead"><span class="lbl">Everything I've touched</span><span class="rule"></span><a class="maplink" href="/stack.html">Full map &rarr;</a></div>
     <div class="bubblewrap">
       <svg class="bubbles" viewBox="0 0 {{ collections.topicmap.w }} {{ collections.topicmap.h }}" role="img" aria-label="Topics sized by frequency">
         <defs>
-          <radialGradient id="orb" cx="48%" cy="40%" r="68%">
-            <stop offset="0%" stop-color="#ef5a45"/>
-            <stop offset="62%" stop-color="#e5331c"/>
-            <stop offset="100%" stop-color="#c32a14"/>
+          <radialGradient id="orb" cx="48%" cy="40%" r="65%">
+            <stop offset="0%" stop-color="#E2902A" stop-opacity="0.96"/>
+            <stop offset="58%" stop-color="#BA7517" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#BA7517" stop-opacity="0.12"/>
           </radialGradient>
+          <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
         </defs>
         {%- for n in collections.topicmap.nodes %}
-        <a href="/devblog/topic/{{ n.slug }}.html" class="orb"><title>{{ n.topic }} - {{ n.count }} post{% if n.count != 1 %}s{% endif %}</title>
-          <circle cx="{{ n.x }}" cy="{{ n.y }}" r="{{ n.r }}" fill="url(#orb)"/>
+        <a href="/devblog/topic/{{ n.slug }}.html" class="orb"><title>{{ n.topic }} &mdash; {{ n.count }} post{% if n.count != 1 %}s{% endif %}</title>
+          <circle cx="{{ n.x }}" cy="{{ n.y }}" r="{{ n.r }}" fill="url(#orb)" filter="url(#glow)"/>
           <text class="cnt" x="{{ n.x }}" y="{{ n.cyCount }}" style="font-size:{{ n.cfont }}px">{{ n.count }}</text>
           {%- if n.showLabel %}<text class="lbl" x="{{ n.x }}" y="{{ n.cyLabel }}" style="font-size:{{ n.lfont }}px">{{ n.topic }}</text>{% endif %}
         </a>
@@ -83,6 +245,6 @@ permalink: "/index.html"
   </section>
   {%- endif %}
 </main>
-<footer><span class="footer-name">David Gomez &middot; Plano, TX</span><div class="footer-links"><a href="mailto:david@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a></div></footer>
+<footer><span class="footer-name">DAVID GOMEZ &middot; Plano, TX</span><div class="footer-links"><a href="mailto:david@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a></div></footer>
 </body>
 </html>

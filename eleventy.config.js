@@ -56,7 +56,6 @@ export default function (eleventyConfig) {
   ["og.png", "favicon.png", "apple-touch-icon.png"].forEach((f) =>
     eleventyConfig.addPassthroughCopy({ ["site/" + f]: f })
   );
-  eleventyConfig.addPassthroughCopy({ "site/swiss.css": "swiss.css" });
   return {
     dir: { input: "site", includes: "_includes", output: "_site" },
     htmlTemplateEngine: false,
