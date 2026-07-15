@@ -172,8 +172,14 @@ nav .btn{padding:6px 14px}
       <span>Richardson, TX</span><span class="cdot"></span>
       <a href="tel:2149456136">(214) 945-6136</a><span class="cdot"></span>
       <a href="mailto:career@davidgomez.cc">career@davidgomez.cc</a><span class="cdot"></span>
+      <a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">linkedin.com/in/davidisdeploying</a><span class="cdot"></span>
       <a href="https://davidgomez.cc">davidgomez.cc</a>
     </div>
+  </div>
+
+  <div class="rsection">
+    <div class="shead"><span class="lbl">Summary</span><div class="rule"></div></div>
+    <p class="lead">Hands-on IT support and deployment technician with 12+ years across IT support and inventory and logistics operations, specializing in high-volume imaging, PC repair, deployment, and endpoint management. Experienced with Windows Server (Active Directory, SCCM) and with Linux, Docker, and networking through a self-built multi-node homelab. AAS in Cloud Computing. Focused on infrastructure, deployment, systems administration, and cloud roles.</p>
   </div>
 
   <div class="rsection">
@@ -184,13 +190,14 @@ nav .btn{padding:6px 14px}
       <div class="ecompany">Future Tech Enterprise, Inc.</div>
       <div class="eloc">Plano, TX</div>
       <ul class="ebullets">
-        <li><strong>Imaging &amp; Deployment:</strong> Executed high-volume imaging of desktops, laptops, and tablets for Fortune 500 and government clients using SCCM/MDT, Windows Autopilot, PXE boot, and USB media.</li>
-        <li><strong>BIOS/UEFI Configuration:</strong> Manually and programmatically updated firmware settings including TPM enablement, Secure Boot configuration, and asset tag injection.</li>
-        <li><strong>Hardware Customization:</strong> Performed internal hardware upgrades on factory units while maintaining warranty integrity.</li>
-        <li><strong>Break/Fix:</strong> Managed the full break/fix lifecycle for used assets, repairing screens, chassis, and hinges to bring devices to Grade A condition for redeployment.</li>
-        <li><strong>Quality Assurance:</strong> Conducted White Glove visual inspections and functional testing to identify cosmetic defects or DOA hardware prior to shipping.</li>
-        <li><strong>Asset Management:</strong> Applied asset tags and security labels; scanned and logged serial numbers and service tags into the ERP/inventory system.</li>
-        <li><strong>Kitting &amp; Logistics:</strong> Assembled custom New Hire Kits bundling laptops with specific peripherals (docks, monitors, headsets, mice) for a premium out-of-the-box experience.</li>
+        <li><strong>Imaging and Deployment:</strong> high-volume imaging of desktops, laptops, and tablets (SCCM/MDT, Autopilot, PXE, USB).</li>
+        <li><strong>BIOS/UEFI Configuration:</strong> TPM enablement, Secure Boot, and firmware asset-tag settings.</li>
+        <li><strong>Hardware Customization:</strong> internal hardware upgrades on factory units while maintaining warranty integrity.</li>
+        <li><strong>Asset Management:</strong> applied asset tags and security labels; logged serial and service tags into the ERP/Inventory system.</li>
+        <li><strong>Kitting and Logistics:</strong> assembled custom New Hire Kits with peripherals (docks, monitors, headsets, mice).</li>
+        <li><strong>Quality Assurance:</strong> White Glove inspection and functional testing; DOA identification prior to shipping.</li>
+        <li><strong>Break/Fix:</strong> repaired cosmetic and structural damage (screens, chassis, hinges) to Grade A condition for redeployment.</li>
+        <li><strong>Deployment and Liquidation:</strong> handled devices across the full lifecycle from deployment through liquidation, including secure data sanitization and disposition of decommissioned assets.</li>
       </ul>
     </div>
     <div class="entry">
@@ -199,9 +206,8 @@ nav .btn{padding:6px 14px}
       <div class="ecompany">FedEx Express</div>
       <div class="eloc">Sherman, TX</div>
       <ul class="ebullets">
-        <li>Delivered packages and documents efficiently, ensuring timely arrivals and high customer satisfaction.</li>
-        <li>Conducted routine vehicle inspections for safety compliance and operational efficiency.</li>
-        <li>Managed route planning to optimize delivery times and reduce operational costs.</li>
+        <li>Delivered packages and documents on time with high customer-satisfaction ratings.</li>
+        <li>Conducted routine vehicle inspections and managed route planning for efficiency.</li>
       </ul>
     </div>
     <div class="entry">
@@ -210,9 +216,7 @@ nav .btn{padding:6px 14px}
       <div class="ecompany">Uber</div>
       <div class="eloc">Dallas-Fort Worth Metroplex, TX</div>
       <ul class="ebullets">
-        <li>Maintained high customer satisfaction ratings providing safe and reliable transportation to a diverse client base.</li>
-        <li>Developed strong communication and problem-solving skills through high-volume daily client interactions.</li>
-        <li>Independently managed scheduling, routing, and vehicle upkeep to meet operational and company standards.</li>
+        <li>Provided safe, reliable transportation with strong customer-satisfaction ratings.</li>
       </ul>
     </div>
     <div class="entry">
@@ -221,19 +225,26 @@ nav .btn{padding:6px 14px}
       <div class="ecompany">Jet Specialty, Inc.</div>
       <div class="eloc">Odessa, TX</div>
       <ul class="ebullets">
-        <li>Managed inventory and logistics to ensure accurate stock levels and timely deliveries for an industrial oil &amp; gas supply company.</li>
-        <li>Coordinated with suppliers and vendors for timely restocking and optimal inventory management.</li>
-        <li>Conducted regular audits of inventory systems to identify discrepancies and implement corrective actions.</li>
-        <li>Utilized data analytics for inventory forecasting, reducing excess stock and improving cash flow.</li>
-        <li>Executed IT support tasks (software and hardware maintenance) to keep operations running efficiently.</li>
+        <li>Managed inventory and logistics for an industrial supply company serving the oil and gas industry.</li>
+        <li>Ran audits, forecasting, and vendor coordination; executed IT support tasks across software and hardware systems.</li>
       </ul>
     </div>
   </div>
 
   <div class="rsection">
+    <div class="shead"><span class="lbl">Technical Projects</span><div class="rule"></div></div>
+    <ul class="ebullets">
+      <li><strong>Multi-Node Linux Homelab:</strong> a five-node Linux fleet (Ubuntu, Synology NAS, Raspberry Pi) meshed with Tailscale for keyless SSH across two subnets; runs Docker and systemd services with public ingress through Cloudflare Tunnels on a high-availability design; administers ~11 TB RAID5 storage.</li>
+      <li><strong>Loupe (loupeculling.com):</strong> a self-hosted full-stack Python and SQLite web app with a machine-learning pipeline (face recognition, image scoring) on a dedicated GPU node; network-aware access control and a commit-before-deploy release discipline via systemd.</li>
+      <li><strong>Breadcrumbs:</strong> a browser extension that extracts order data to structured JSON, plus a downstream pipeline that reconciles each order against bank transactions through an API connector, with rate-limit handling and near-miss rejection.</li>
+      <li><strong>davidgomez.cc:</strong> a static site (Eleventy) deployed to Cloudflare Pages with Git-connected CI/CD; DNS and email records configured end to end.</li>
+    </ul>
+  </div>
+
+  <div class="rsection">
     <div class="shead"><span class="lbl">Education</span><div class="rule"></div></div>
     <div class="edu">
-      <div><div class="edeg">AAS in Cloud Computing</div><div class="esch">Collin College &middot; McKinney, TX</div></div>
+      <div><div class="edeg">AAS, Cloud Computing - Infrastructure</div><div class="esch">Collin College &middot; McKinney, TX</div></div>
       <div class="edudate">Aug 2024 - May 2026</div>
     </div>
     <div class="edu">
@@ -245,19 +256,21 @@ nav .btn{padding:6px 14px}
   <div class="rsection">
     <div class="shead"><span class="lbl">Certifications</span><div class="rule"></div></div>
     <div class="pills">
-      <span class="pill">Cloud Infrastructure Technician, Collin College</span>
-      <span class="pill">AWS Cloud Fundamentals</span>
+      <span class="pill">Cloud Infrastructure Technician (Collin College)</span>
+      <span class="pill">HP Commercial and Consumer Desktops, Workstations and Notebooks Service Qualification (SQ24-PC)</span>
+      <span class="pill">CS50P: Introduction to Programming with Python (Harvard / edX)</span>
+      <span class="pill">Claude 101 (Anthropic)</span>
     </div>
   </div>
 
   <div class="rsection">
     <div class="shead"><span class="lbl">Skills &amp; Technologies</span><div class="rule"></div></div>
     <div class="skrows">
-      <div class="skrow"><div class="skcat">OS Deployment</div><div class="pills"><span class="pill">SCCM / MDT</span><span class="pill">Windows Autopilot</span><span class="pill">PXE Boot</span><span class="pill">Microsoft Intune</span><span class="pill">Windows 10 / 11</span></div></div>
-      <div class="skrow"><div class="skcat">Firmware &amp; Hardware</div><div class="pills"><span class="pill">BIOS / UEFI</span><span class="pill">TPM</span><span class="pill">Secure Boot</span><span class="pill">Laptop Teardown</span><span class="pill">Component Replacement</span><span class="pill">Break / Fix</span><span class="pill">Hardware Stress Testing</span></div></div>
-      <div class="skrow"><div class="skcat">IT Operations</div><div class="pills"><span class="pill">System Imaging</span><span class="pill">Image Verification &amp; QC</span><span class="pill">DOA Inspection</span><span class="pill">Asset Tagging</span><span class="pill">Peripheral Kitting</span><span class="pill">Data Sanitization</span><span class="pill">SLA Compliance</span><span class="pill">Root Cause Analysis</span><span class="pill">High-Volume Production</span></div></div>
-      <div class="skrow"><div class="skcat">Cloud &amp; Virtualization</div><div class="pills"><span class="pill">Microsoft Azure</span><span class="pill">AWS</span><span class="pill">VMware / Hyper-V</span><span class="pill">Docker</span><span class="pill">Podman</span></div></div>
-      <div class="skrow"><div class="skcat">Systems &amp; Scripting</div><div class="pills"><span class="pill">Active Directory</span><span class="pill">Python</span><span class="pill">Linux</span><span class="pill">Inventory Control</span></div></div>
+      <div class="skrow"><div class="skcat">OS Deployment</div><div class="pills"><span class="pill">SCCM/MDT</span><span class="pill">Windows Autopilot</span><span class="pill">PXE</span><span class="pill">Intune</span><span class="pill">Windows 10/11</span><span class="pill">Windows Server</span></div></div>
+      <div class="skrow"><div class="skcat">Firmware &amp; Hardware</div><div class="pills"><span class="pill">BIOS/UEFI</span><span class="pill">TPM</span><span class="pill">Secure Boot</span><span class="pill">Teardown and Repair</span><span class="pill">Stress Testing</span><span class="pill">Break/Fix</span><span class="pill">DOA Inspection</span></div></div>
+      <div class="skrow"><div class="skcat">IT Operations</div><div class="pills"><span class="pill">Imaging</span><span class="pill">QC</span><span class="pill">Asset Tagging</span><span class="pill">Kitting</span><span class="pill">Data Sanitization</span><span class="pill">SLA Compliance</span><span class="pill">Root Cause Analysis</span><span class="pill">High-Volume Production</span><span class="pill">Inventory Control</span></div></div>
+      <div class="skrow"><div class="skcat">Infrastructure &amp; Cloud</div><div class="pills"><span class="pill">Linux (Ubuntu)</span><span class="pill">Docker</span><span class="pill">Podman</span><span class="pill">Tailscale</span><span class="pill">Cloudflare (Tunnels and Pages)</span><span class="pill">DNS</span><span class="pill">DHCP</span><span class="pill">TCP/IP</span><span class="pill">systemd</span><span class="pill">CI/CD</span><span class="pill">AWS (Cloud Fundamentals)</span><span class="pill">Azure</span><span class="pill">VMware/Hyper-V</span></div></div>
+      <div class="skrow"><div class="skcat">Systems &amp; Scripting</div><div class="pills"><span class="pill">Active Directory</span><span class="pill">Python</span><span class="pill">Bash</span><span class="pill">Git</span><span class="pill">AI-Assisted Development (Claude Code)</span></div></div>
     </div>
   </div>
 </div>
