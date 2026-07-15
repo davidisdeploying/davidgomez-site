@@ -37,4 +37,4 @@ The vector is the workhorse. Turning an image into a vector that captures its me
 
 ## Still open / next
 
-The pipeline runs comfortably on my own hardware now. The natural next step is the one my studies point at: taking these same patterns and standing them up at cloud scale, with the reliability and automation to match.
+The pipeline runs comfortably on my own hardware now. The natural next step is to take these same patterns and stand them up at cloud scale, with the reliability and automation to match.

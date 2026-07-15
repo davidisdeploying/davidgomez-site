@@ -35,4 +35,4 @@ Meaning-search changes what you write down. Once I could find notes by a fuzzy m
 
 ## Still open / next
 
-My whole knowledge base is now something I can question from my phone in plain language. The next want is to take these same patterns, embeddings, retrieval, and grounding, and build them at cloud scale, which is exactly where I am pointing my studies next.
+My whole knowledge base is now something I can question from my phone in plain language. The next want is to take these same patterns, embeddings, retrieval, and grounding, and build them at cloud scale, which is where I am taking this next.

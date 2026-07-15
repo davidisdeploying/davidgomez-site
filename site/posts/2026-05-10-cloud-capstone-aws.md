@@ -37,4 +37,4 @@ The homelab and the cloud are the same instincts at different scales. Everything
 
 ## Still open / next
 
-This was a course capstone, a learning build, not a production system I run. The next step is the obvious one: keep going down the cloud and network-engineering path I am studying, and put these patterns to work on something real.
+This was a course capstone, a learning build, not a production system I run. The next step is the obvious one: put these patterns to work on something real, at cloud scale.
