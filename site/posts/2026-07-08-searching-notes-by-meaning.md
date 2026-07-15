@@ -17,7 +17,7 @@ Ask from anywhere, in plain language. I connected the search to the AI assistant
 
 ## Problems & fixes
 
-The biggest notes overflowed my small GPU. The cost of embedding text grows with the square of its length, and my GPU only has 4 GB of memory, so my longest notes blew past it. Instead of buying a bigger card, I split the work: most notes embed on the GPU, and the handful of oversized ones fall back to the CPU. Because both use the exact same model, the resulting vectors live in the same space and mix freely.
+A few notes are too long even for a whole-note model. My biggest running logs exceed the model's context window and get truncated when embedded. I accepted that, because the real content lives in the individual session notes, which fit whole, and the oversized logs are just thin indexes into them.
 
 Search that fails silently. This is the trap with this kind of search: if the index and the query use even slightly different settings, the vectors stop lining up and the results quietly get worse, with no error to tell you. The fix was discipline: the exact same model and the exact same processing on both sides, pinned so they can never drift apart.
 
@@ -31,7 +31,7 @@ Two lenses, not one. This meaning-based search and the nightly-built organized r
 
 Retrieval breaks quietly, which makes it dangerous. A wrong setting here does not crash, it just returns slightly worse answers, which is the kind of bug you do not notice until it has misled you. Pinning both ends to the same model and recipe is not optional.
 
-A small GPU is a good teacher. Hitting the 4 GB wall is what pushed me to the clean GPU-plus-CPU split. A bigger card would have let me get away with a lazier design.
+Meaning-search changes what you write down. Once I could find notes by a fuzzy memory instead of exact words, I stopped trying to file everything perfectly and just wrote, because retrieval by meaning forgives disorganization.
 
 ## Still open / next
 

@@ -19,7 +19,7 @@ A quality score anyone can run. The score that ordered photos used to come from 
 
 ## Problems & fixes
 
-A modest GPU forces real choices. All of this runs on a single consumer graphics card, not a datacenter. That meant choosing efficient models, processing in batches, and falling back to the processor for the pieces that did not fit, rather than assuming unlimited memory.
+Built to run on modest hardware. Loupe is for self-hosters, whose machines range from a big card to a small one, so I built the pipeline to run lean either way: compact models, batched inference, and a CPU fallback for anything that does not fit a smaller GPU. My own dev machine is a 16 GB card, but nothing in the pipeline assumes that.
 
 Keeping stages from colliding. The different models have different, sometimes conflicting software needs, so I isolated the face pipeline in its own environment to keep its dependencies from fighting the rest. Boring, but it is what keeps the whole thing runnable.
 
