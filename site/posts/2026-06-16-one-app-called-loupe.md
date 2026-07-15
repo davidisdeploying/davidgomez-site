@@ -1,11 +1,11 @@
 ---
-title: "June 16: a kernel reboot, two apps becoming one, and an enrichment layer pulled from Apple"
+title: "June 16 - a kernel reboot, two apps becoming one, and an enrichment layer pulled from Apple"
 date: 2026-06-16
 topics: ["SQLite", "systemd", "Cloudflare", "FFmpeg", "Image processing", "Performance", "Concurrency", "Metadata pipeline", "rclone", "Backups", "Branding", "Data quality", "Debugging", "Product strategy"]
 summary: "The day the project got a name and a spine: I came back to a box that had silently rebooted, merged two sibling photo-review apps into one productionized service called Loupe, added a cloud backup and AI-written period summaries, and built an enrichment layer that joins Apple's own labels, people, and scores back onto my library by UUID."
 ---
 
-This was the day the project stopped being two experiments and became one thing with a name. It opened with a recovery I didn't ask for and ended with the app (now called **Loupe**) running as a real service, backed up to the cloud, writing prose summaries of where I'd been, and carrying an enrichment layer pulled straight out of Apple Photos. A lot of threads. Here's the whole day.
+The thing that clicked today: two sibling photo-review experiments stopped being two things and became one, Loupe, running as a real managed service with its own brand, its own cloud backup, and an enrichment layer pulled straight out of Apple Photos. It opened with a recovery I didn't ask for and ended with a lot of threads tied off. Here's the whole day.
 
 ## Built / shipped
 

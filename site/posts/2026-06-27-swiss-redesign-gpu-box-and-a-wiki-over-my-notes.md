@@ -1,11 +1,11 @@
 ---
-title: "June 27 — A Swiss redesign, a GPU box on CUDA, and a wiki over all my notes"
+title: "June 27 - a Swiss redesign, a GPU box on CUDA, and a wiki over all my notes"
 date: 2026-06-27
 topics: ["Design systems", "Typography", "CSS", "Eleventy", "Machine learning", "GPU", "CUDA", "Python", "Linux", "Knowledge graph"]
 summary: "Reskinned davidgomez.cc into a Swiss/International typographic system, stood up a GPU box and proved face-embedding on CUDA, and hand-built a regenerable wiki over every one of my notes."
 ---
 
-Four separate things shipped today, and they have almost nothing to do with each other except that I built all of them.
+The thing that clicked today: four separate things shipped, and they have almost nothing to do with each other except that I built all of them.
 
 ## Built / shipped
 

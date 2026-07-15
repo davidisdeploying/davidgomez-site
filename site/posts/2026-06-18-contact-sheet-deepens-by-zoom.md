@@ -1,11 +1,11 @@
 ---
-title: "June 18: the motif gets deeper the closer you zoom"
+title: "June 18 - the motif gets deeper the closer you zoom"
 date: 2026-06-18
 topics: ["Web UI", "Design systems", "CSS", "Branding", "Concurrency", "Debugging", "Python", "Linux", "Cloudflare", "Product strategy"]
 summary: "Redesigned the month view's day cards into a contact-sheet film motif, polished the marketing site's desktop nav, survived a concurrent-edit collision that wiped my work off disk, and finally figured out what machine I've actually been building on."
 ---
 
-Today was mostly design and one genuinely unsettling moment where my changes vanished out from under me. Three separate threads, so I'll take them in order.
+The thing that clicked today: while I was mid-edit on a shared file, another process did a whole-file restore that wiped my changes off disk, and the running app never noticed because it kept my edits in memory. Design work and one genuinely unsettling moment, three separate threads, so I'll take them in order.
 
 ## Built / shipped
 

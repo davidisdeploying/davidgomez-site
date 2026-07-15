@@ -1,11 +1,11 @@
 ---
-title: "June 20: a portable enrichment import, a console that runs the pipeline, and a brand pinned down"
+title: "June 20 - a portable enrichment import, a console that runs the pipeline, and a brand pinned down"
 date: 2026-06-20
 topics: ["Python", "SQLite", "Metadata pipeline", "Image processing", "Concurrency", "systemd", "Cloudflare", "Branding", "Design systems", "Typography", "CSS", "Web UI", "Product strategy", "Face recognition", "Debugging", "Data quality"]
 summary: "A long, many-threaded day. I built the full path that lets a second person's Apple-photo metadata become my app's enrichment database, turned the setup console into something that can actually start the pipeline stages itself, split the frontend out of the monolith, unified the brand across app and marketing site, stood up real email, and fixed a couple of bugs that had been silently breaking the photo pipeline for a while."
 ---
 
-This was a sprawling day, closer to a week's worth of small fronts than one story. The throughline, if there is one: most of it was about making Loupe runnable by someone who isn't me, and the rest was making it *look* like one coherent product while I was in there anyway.
+The thing that clicked today: most of a sprawling, week's-worth-of-fronts day turned out to be about one throughline, making Loupe runnable by someone who isn't me, with the rest spent making it look like one coherent product while I was in there anyway.
 
 ## Built / shipped
 

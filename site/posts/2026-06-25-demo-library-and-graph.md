@@ -1,11 +1,11 @@
 ---
-title: "June 25 — faking a whole photo library, teaching the demo to act like the app, and mapping it as a graph"
+title: "June 25 - faking a whole photo library, teaching the demo to act like the app, and mapping it as a graph"
 date: 2026-06-25
 topics: ["Demo", "Gemini", "Image processing", "Machine learning", "Knowledge graph", "Python", "Data quality", "Web UI"]
 summary: "Built a reusable image generator to manufacture a synthetic photo library for the public cull demo, wired the static demo to behave like the real app across several views, and ran a graphify pass to map the app's architecture and data flow."
 ---
 
-Three threads today, all aimed at the same thing from different angles: making Loupe legible to someone who is not me. A culling tool is hard to show off when the photos are private, so most of the day went into building a fake library convincing enough to demo, and then making the demo behave like the real product.
+The thing that clicked today: a culling tool is hard to show off when the photos are private, so making Loupe legible to someone who is not me meant building a fake library convincing enough to demo, and then making the demo behave like the real product. Three threads today, all aimed at that from different angles.
 
 ## Built / shipped
 

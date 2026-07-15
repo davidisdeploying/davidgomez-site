@@ -1,11 +1,11 @@
 ---
-title: "June 19: the day Loupe got its name, its face, and its front door"
+title: "June 19 - the day Loupe got its name, its face, and its front door"
 date: 2026-06-19
 topics: ["Python", "SQLite", "Face recognition", "Maps", "Branding", "Design systems", "Typography", "CSS", "Web UI", "systemd", "Cloudflare", "Debugging", "Data quality", "Performance"]
 summary: "A long, many-threaded day: renamed both repos to loupe, shipped the Map and Cutting Room pages, built the in-app People view on top of face embeddings, redrew the brand mark down to the favicon, and stood up the onboarding front door."
 ---
 
-This was one of those days where I touched almost every part of the project at once. No single big feature. More like five threads braided together, each going recon → build → verify → ship. Writing it down so I remember what actually moved.
+The thing that clicked today: I touched almost every part of the project at once, no single big feature, more like five threads braided together, each going recon then build then verify then ship. Writing it down so I remember what actually moved.
 
 ## Built / shipped
 
