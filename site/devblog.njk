@@ -5,15 +5,15 @@ permalink: /devblog.html
 ---
 <main>
   <div class="phero">
-    <div class="eyebrow">Devblog</div>
-    <h1>Working <em>notes</em></h1>
-    <p class="lead">Near-daily notes on building Loupe, side projects, and whatever I'm learning across tech, the cloud, and getting better at the craft, drawn from the build log I keep as I go.</p>
+    <div class="eyebrow">Working notes</div>
+    <h1>Dev<em>blog</em></h1>
+    <p class="lead">One post for each thing that clicked while I built it: a self-hosted homelab, the automation and search systems that run it, my photo app Loupe, and the smaller tools in between. It runs from cloud fundamentals up to the systems I keep alive at home.</p>
   </div>
   {%- if collections.topics | length %}
-  <div class="topiccloud">
-    <div class="shead"><span class="lbl">Topics</span><span class="rule"></span><a class="maplink" href="/stack.html">Stack map &rarr;</a></div>
+  <details class="topiccloud">
+    <summary class="shead"><span class="lbl">Topics</span><span class="tcount">{{ collections.topics | length }}</span><span class="chev">&#9662;</span><span class="rule"></span><a class="maplink" href="/stack.html">Stack map &rarr;</a></summary>
     <div class="topics">{% for t in collections.topics %}<a href="/devblog/topic/{{ t.slug }}.html">{{ t.topic }}<span class="ct">{{ t.count }}</span></a>{% endfor %}</div>
-  </div>
+  </details>
   {%- endif %}
   <div class="bloglist"><div class="posts">
   {%- for post in collections.post | reverse %}
