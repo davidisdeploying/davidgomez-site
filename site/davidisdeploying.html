@@ -142,21 +142,36 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
   </div>
   <div class="projects">
     <div class="proj lead-proj">
-      <div class="ptop"><h3>Tandem</h3><span class="status shipped">Shipped</span></div>
-      <p>A two-seat <strong>Captain / Stoker</strong> workflow for working with Claude: a strategy seat that plans and writes prompts, and an engineering seat that executes, trading work back and forth over synced vault "lanes," with selective recall and ledger compaction to keep context lean. I built it to run my own projects, then extracted and open-sourced the method.</p>
-      <div class="ptags"><span>Open source &middot; MIT</span><span>Claude</span><span>Agent workflow</span><span>Bash</span><span>Markdown</span></div>
-      <div class="plinks"><a class="btn" href="https://github.com/davidisdeploying/tandem" target="_blank">GitHub &#8599;</a></div>
+      <div class="ptop"><h3>Multi-Node Linux Homelab</h3><span class="status wip">In progress</span></div>
+      <p>Five networked machines, each with a defined role: a custom-built GPU compute box, a repurposed Mac mini as a deploy host, a Synology NAS for storage, and Raspberry Pi nodes for the control plane and public ingress. Meshed with Tailscale across two subnets, running Docker and systemd services, with public services exposed through Cloudflare tunnels on a high-availability design.</p>
+      <div class="ptags"><span>Linux</span><span>Ubuntu</span><span>Tailscale</span><span>Docker</span><span>Cloudflare Tunnels</span><span>systemd</span><span>RAID</span></div>
+    </div>
+    <div class="proj">
+      <div class="ptop"><h3>Fleet Orchestration Relay</h3><span class="status wip">In progress</span></div>
+      <p>A relay system for delegating and running tasks across the fleet, including detached AI-agent jobs. It stages a scoped request, dispatches it to the right node, and collects the results back. Built on a keyless SSH mesh over Tailscale with a token-gated, read-before-write protocol so jobs stay auditable and safe to run unattended.</p>
+      <div class="ptags"><span>Linux</span><span>Tailscale</span><span>SSH</span><span>Python</span><span>Automation</span></div>
+    </div>
+    <div class="proj">
+      <div class="ptop"><h3>Fleet Dashboard &amp; Knowledge Base</h3><span class="status wip">In progress</span></div>
+      <p>A single surface for the homelab with live node health, running jobs, and an activity feed, merged with a local-first knowledge browser over my project notes: keyword and semantic search, backlinks, and a graph view. All served behind a fail-closed access gate.</p>
+      <div class="ptags"><span>Python</span><span>Semantic search</span><span>RAG</span><span>Cloudflare Access</span><span>PWA</span></div>
     </div>
     <div class="proj">
       <div class="ptop"><h3>Loupe</h3><span class="status wip">In progress</span></div>
-      <p>A self-hosted photo culling and library app built over my own ~90,000-frame iCloud library. A darkroom-styled interface for deciding what to keep and what to cut, with on-device enrichment (face grouping, scene and quality scoring, places, and trips) all running on hardware I own, nothing in the cloud.</p>
+      <p>A self-hosted full-stack photo-culling app I built and run on my own hardware. It scores and groups a large photo library through a machine-learning pipeline (face recognition and quality scoring on a dedicated GPU node) and serves a review interface for fast culling.</p>
       <div class="ptags"><span>Python</span><span>SQLite</span><span>Self-hosted</span><span>Computer vision</span><span>ONNX</span></div>
       <div class="plinks"><a class="btn" href="https://loupeculling.com" target="_blank">loupeculling.com &#8599;</a></div>
     </div>
     <div class="proj">
+      <div class="ptop"><h3>Tandem</h3><span class="status shipped">Shipped</span></div>
+      <p>A two-seat Captain and Stoker workflow for pairing AI agents on a shared repo, open-sourced under the MIT license.</p>
+      <div class="ptags"><span>Open source</span><span>MIT</span><span>Agent workflow</span><span>Bash</span><span>Markdown</span></div>
+      <div class="plinks"><a class="btn" href="https://github.com/davidisdeploying/tandem" target="_blank">GitHub &#8599;</a></div>
+    </div>
+    <div class="proj">
       <div class="ptop"><h3>davidgomez.cc</h3><span class="status shipped">Shipped</span></div>
-      <p>This site: hand-built static pages on Cloudflare Pages, sharing one darkroom design language with Loupe. No framework, no build step, just craft.</p>
-      <div class="ptags"><span>HTML / CSS</span><span>Cloudflare Pages</span><span>No build step</span></div>
+      <p>This site: a hand-built static site (Eleventy) deployed to Cloudflare Pages with Git-connected CI/CD. I handle the DNS and email records end to end.</p>
+      <div class="ptags"><span>Eleventy</span><span>Cloudflare Pages</span><span>CI/CD</span><span>DNS</span></div>
       <div class="plinks"><a class="btn" href="index.html">Home</a></div>
     </div>
     <div class="proj proj-ph">
