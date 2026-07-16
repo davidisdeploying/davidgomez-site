@@ -1,0 +1,19 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>{{ site.url }}/</loc></url>
+<url><loc>{{ site.url }}/work.html</loc></url>
+<url><loc>{{ site.url }}/davidisdeploying.html</loc></url>
+<url><loc>{{ site.url }}/resume.html</loc></url>
+<url><loc>{{ site.url }}/devblog.html</loc></url>
+<url><loc>{{ site.url }}/stack.html</loc></url>
+{%- for post in collections.post %}
+<url><loc>{{ site.url }}{{ post.url }}</loc><lastmod>{{ post.data.date | isoDate }}</lastmod></url>
+{%- endfor %}
+{%- for t in collections.topics %}
+<url><loc>{{ site.url }}/devblog/topic/{{ t.slug }}.html</loc></url>
+{%- endfor %}
+</urlset>
