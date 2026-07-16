@@ -1,0 +1,90 @@
+---
+layout: base.njk
+title: Infrastructure
+description: "The homelab, mapped: five machines with defined roles, mesh networking, public ingress, and a failover design that got tested for real."
+permalink: /infrastructure.html
+next:
+  href: /davidisdeploying.html
+  label: Projects
+---
+<main>
+  <div class="phero">
+    <div class="eyebrow">The homelab</div>
+    <h1>Five machines, <em>one fleet</em></h1>
+    <p class="lead">I design, build, and run a small self-hosted infrastructure: five machines, each with a defined role, meshed together and reachable from anywhere. This is the map of it: how the pieces connect, how it stays up when one of them doesn't, and what actually runs on it.</p>
+  </div>
+
+  <div class="arch-wrap">
+    <svg class="arch-svg" viewBox="0 0 460 540" role="img" aria-label="Five nodes meshed with Tailscale: control plane, public ingress, GPU compute, deploy host, and NAS storage. A dashed line runs from the ingress node to the public internet through a Cloudflare Tunnel. A dashed arc between the control plane and ingress nodes marks the failover path.">
+      <line class="trunk" x1="55" y1="62" x2="55" y2="478"/>
+      <line class="stub" x1="55" y1="62" x2="95" y2="62"/>
+      <line class="stub" x1="55" y1="166" x2="95" y2="166"/>
+      <line class="stub" x1="55" y1="270" x2="95" y2="270"/>
+      <line class="stub" x1="55" y1="374" x2="95" y2="374"/>
+      <line class="stub" x1="55" y1="478" x2="95" y2="478"/>
+      <text class="mesh-label" x="25" y="270" text-anchor="middle" transform="rotate(-90 25 270)">TAILSCALE MESH</text>
+
+      <path class="failover-line" d="M345,62 Q405,114 345,166"/>
+      <text class="failover-label" x="392" y="118" text-anchor="middle">FAILOVER</text>
+
+      <line class="net-line" x1="345" y1="166" x2="380" y2="166"/>
+      <rect class="net-box" x="380" y="141" width="68" height="50" rx="8"/>
+      <text class="net-title" x="414" y="163" text-anchor="middle">Public</text>
+      <text class="net-title" x="414" y="178" text-anchor="middle">internet</text>
+
+      <rect class="node-box" x="95" y="20" width="250" height="84" rx="10"/>
+      <rect class="node-accent" x="95" y="20" width="4" height="84"/>
+      <text class="node-title" x="113" y="56">Control plane</text>
+      <text class="node-sub" x="113" y="78">Raspberry Pi</text>
+
+      <rect class="node-box" x="95" y="124" width="250" height="84" rx="10"/>
+      <rect class="node-accent" x="95" y="124" width="4" height="84"/>
+      <text class="node-title" x="113" y="160">Public ingress</text>
+      <text class="node-sub" x="113" y="182">Raspberry Pi</text>
+
+      <rect class="node-box" x="95" y="228" width="250" height="84" rx="10"/>
+      <rect class="node-accent" x="95" y="228" width="4" height="84"/>
+      <text class="node-title" x="113" y="264">GPU compute</text>
+      <text class="node-sub" x="113" y="286">Dedicated GPU box</text>
+
+      <rect class="node-box" x="95" y="332" width="250" height="84" rx="10"/>
+      <rect class="node-accent" x="95" y="332" width="4" height="84"/>
+      <text class="node-title" x="113" y="368">Deploy host</text>
+      <text class="node-sub" x="113" y="390">Mac mini</text>
+
+      <rect class="node-box" x="95" y="436" width="250" height="84" rx="10"/>
+      <rect class="node-accent" x="95" y="436" width="4" height="84"/>
+      <text class="node-title" x="113" y="472">NAS storage</text>
+      <text class="node-sub" x="113" y="494">Network-attached storage</text>
+    </svg>
+    <p class="arch-legend">Solid line: the Tailscale mesh, every node reaches every other node directly. Dashed amber arc: the failover path, control plane and ingress duties can move to a standby if one node goes down. Dashed line on the right: the public ingress node's outbound Cloudflare Tunnel, the only path in from the internet.</p>
+  </div>
+
+  <div class="infra-page">
+    <div class="infra-section">
+      <div class="shead"><span class="lbl">The fleet</span><span class="rule"></span></div>
+      <ul>
+        <li><strong>Control plane</strong> (Raspberry Pi): coordinates jobs across the fleet.</li>
+        <li><strong>Public ingress</strong> (Raspberry Pi): the one door in from the internet.</li>
+        <li><strong>GPU compute</strong> (a dedicated GPU box): runs the machine learning pipeline.</li>
+        <li><strong>Deploy host</strong> (a Mac mini): runs the apps I've shipped.</li>
+        <li><strong>NAS storage</strong> (network-attached storage): holds the data everything else reads and writes.</li>
+      </ul>
+    </div>
+
+    <div class="infra-section">
+      <div class="shead"><span class="lbl">Networking</span><span class="rule"></span></div>
+      <p class="section-body">All five machines sit on the same private Tailscale mesh, so any one of them can reach any other directly without exposing anything to the open internet. The only door in from the outside is a Cloudflare Tunnel running on the ingress node. It makes a handful of self-hosted services reachable from anywhere without opening a single port on my home network.</p>
+    </div>
+
+    <div class="infra-section">
+      <div class="shead"><span class="lbl">The failover story</span><span class="rule"></span></div>
+      <p class="section-body">Control plane and public ingress both run on interchangeable hardware on purpose, so either role can move to a standby if a machine goes down. That design got tested for real: when my control plane machine died mid-job, I moved its duties over and kept the fleet running instead of losing a night to it. The full account, including what broke along the way, is in <a href="/devblog/control-plane-outage-failover.html">the control plane outage post</a>.</p>
+    </div>
+
+    <div class="infra-section">
+      <div class="shead"><span class="lbl">What runs on it</span><span class="rule"></span></div>
+      <p class="section-body">This fleet is the ground under everything else I've built. The <a href="/davidisdeploying.html#relay">orchestration relay</a> hands work to whichever machine should run it and collects the result later, so I stopped babysitting jobs at a keyboard: <a href="/devblog/handing-work-to-any-machine.html">more on how that works</a>. A <a href="/davidisdeploying.html#dashboard">fleet dashboard and knowledge base</a> keeps track of node health, running jobs, and my own project notes in one place. And the GPU box carries <a href="/davidisdeploying.html#loupe">Loupe's machine learning pipeline</a>, entirely on my own hardware: <a href="/devblog/loupe-ml-pipeline-on-your-own-hardware.html">the writeup on that</a>.</p>
+    </div>
+  </div>
+</main>

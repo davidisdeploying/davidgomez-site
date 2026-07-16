@@ -94,6 +94,46 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
   color:var(--mut);transition:color .12s}
 .footer-links a:hover{color:var(--lit)}
 
+/* next-link (threading) */
+.next-link{max-width:900px;margin:0 auto;padding:0 40px;width:100%;text-align:right}
+.next-link a{font-family:var(--mo);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);transition:color .12s}
+.next-link a:hover{color:var(--lit)}
+@media(max-width:600px){.next-link{padding:0 22px}}
+
+/* start-here strip */
+.starthere{display:flex;flex-direction:column;gap:0;margin-top:10px}
+.shitem{display:block;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.shitem:first-child{padding-top:6px}
+.shitem:last-child{border-bottom:none}
+.shdate{font-family:var(--mo);font-size:10.5px;letter-spacing:.04em;color:var(--amber);margin-bottom:4px}
+.shtitle{font-family:var(--hd);font-size:18px;color:var(--ink);line-height:1.3;margin-bottom:4px;transition:color .12s}
+.shitem:hover .shtitle{color:var(--lit)}
+.shdesc{font-family:var(--bd);font-size:13.5px;color:var(--mut);line-height:1.55}
+
+/* infrastructure page */
+.arch-wrap{max-width:460px;margin:32px auto 8px;padding:0 40px}
+.arch-svg{width:100%;height:auto;display:block}
+.arch-svg .trunk,.arch-svg .stub{stroke:var(--line);stroke-width:2}
+.arch-svg .node-box{fill:var(--panel);stroke:var(--line);stroke-width:1.4}
+.arch-svg .node-accent{fill:var(--amber)}
+.arch-svg .node-title{font-family:var(--mo);font-size:17px;font-weight:500;fill:var(--ink)}
+.arch-svg .node-sub{font-family:var(--mo);font-size:12px;fill:var(--mut)}
+.arch-svg .net-box{fill:var(--bg2);stroke:var(--amber);stroke-width:1.4;stroke-dasharray:4 3}
+.arch-svg .net-title{font-family:var(--mo);font-size:12px;fill:var(--lit)}
+.arch-svg .net-line{stroke:var(--amber);stroke-width:1.6;stroke-dasharray:4 3}
+.arch-svg .failover-line{stroke:var(--lit);stroke-width:1.8;stroke-dasharray:5 4;fill:none}
+.arch-svg .failover-label{font-family:var(--mo);font-size:10.5px;fill:var(--lit)}
+.arch-svg .mesh-label{font-family:var(--mo);font-size:12px;letter-spacing:.1em;fill:var(--amber)}
+.arch-legend{font-family:var(--bd);font-size:13.5px;color:var(--mut);line-height:1.6;max-width:460px;margin:16px auto 0;padding:0 40px}
+.infra-page{max-width:740px;margin:0 auto;padding:16px 40px 80px;width:100%}
+.infra-section{margin-bottom:46px}
+.infra-section .section-body{font-family:var(--bd);font-size:16px;color:var(--mut);line-height:1.75;max-width:680px}
+.infra-section .section-body strong{color:var(--ink2);font-weight:500}
+.infra-section ul{margin:14px 0 0;padding-left:1.3em}
+.infra-section li{margin:.5em 0;font-family:var(--bd);font-size:15px;color:var(--mut);line-height:1.65}
+.infra-section li strong{color:var(--ink2);font-weight:500}
+@media(max-width:600px){.arch-wrap{padding:0 22px}.arch-legend{padding:0 22px}.infra-page{padding:12px 22px 64px}}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (max-width:640px){
@@ -176,8 +216,9 @@ details.topiccloud[open] .chev{transform:rotate(180deg)}
 {% endraw %}</style>
 </head>
 <body>
-<nav><a href="/index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="/index.html">Home</a></li><li><a href="/work.html">Work</a></li><li><a href="/davidisdeploying.html">Projects</a></li><li><a href="/devblog.html"{% if "/devblog" in page.url %} class="active"{% endif %}>Devblog</a></li><li><a href="/stack.html"{% if page.url == "/stack.html" %} class="active"{% endif %}>Stack</a></li><li><a href="/resume.html">Résumé</a></li></ul></nav>
+<nav><a href="/index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="/index.html">Home</a></li><li><a href="/infrastructure.html"{% if page.url == "/infrastructure.html" %} class="active"{% endif %}>Infrastructure</a></li><li><a href="/davidisdeploying.html">Projects</a></li><li><a href="/devblog.html"{% if "/devblog" in page.url %} class="active"{% endif %}>Devblog</a></li><li><a href="/stack.html"{% if page.url == "/stack.html" %} class="active"{% endif %}>Stack</a></li><li><a href="/work.html">Work</a></li><li><a href="/resume.html">Résumé</a></li></ul></nav>
 {{ content | safe }}
-<footer><span class="footer-name">DAVID GOMEZ &middot; Richardson, TX</span><div class="footer-links"><a href="mailto:career@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a></div></footer>
+{%- if next %}<div class="next-link"><a href="{{ next.href }}">Next: {{ next.label }} &rarr;</a></div>{%- endif %}
+<footer><span class="footer-name">DAVID GOMEZ &middot; Richardson, TX</span><div class="footer-links"><a href="mailto:career@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a><a href="https://github.com/davidisdeploying" target="_blank">GitHub</a></div></footer>
 </body>
 </html>

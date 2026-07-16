@@ -115,6 +115,10 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
 .proj-ph h3{color:var(--mut);font-style:italic}
 .proj-ph p{margin-bottom:0}
 @media(max-width:600px){.phero{padding:56px 22px 8px}.projects{padding:34px 22px 64px}}
+.next-link{max-width:900px;margin:0 auto;padding:0 40px;width:100%;text-align:right}
+.next-link a{font-family:var(--mo);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);transition:color .12s}
+.next-link a:hover{color:var(--lit)}
+@media(max-width:600px){.next-link{padding:0 22px}}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="David Gomez">
@@ -133,7 +137,7 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
-<nav><a href="index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="work.html">Work</a></li><li><a href="davidisdeploying.html" class="active">Projects</a></li><li><a href="devblog.html">Devblog</a></li><li><a href="stack.html">Stack</a></li><li><a href="resume.html">Résumé</a></li></ul></nav>
+<nav><a href="index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="infrastructure.html">Infrastructure</a></li><li><a href="davidisdeploying.html" class="active">Projects</a></li><li><a href="devblog.html">Devblog</a></li><li><a href="stack.html">Stack</a></li><li><a href="work.html">Work</a></li><li><a href="resume.html">Résumé</a></li></ul></nav>
 <main>
   <div class="phero">
     <div class="eyebrow">davidgomez.cc/davidisdeploying</div>
@@ -141,22 +145,22 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
     <p class="lead">Side projects, tools, and experiments: what I build when I'm not configuring hardware. Mostly things that scratch my own itch and teach me something on the way.</p>
   </div>
   <div class="projects">
-    <div class="proj lead-proj">
+    <div class="proj lead-proj" id="fleet">
       <div class="ptop"><h3>Multi-Node Linux Homelab</h3><span class="status wip">In progress</span></div>
       <p>Five networked machines, each with a defined role: a custom-built GPU compute box, a repurposed Mac mini as a deploy host, a Synology NAS for storage, and Raspberry Pi nodes for the control plane and public ingress. Meshed with Tailscale across two subnets, running Docker and systemd services, with public services exposed through Cloudflare tunnels on a high-availability design.</p>
       <div class="ptags"><span>Linux</span><span>Ubuntu</span><span>Tailscale</span><span>Docker</span><span>Cloudflare Tunnels</span><span>systemd</span><span>RAID</span></div>
     </div>
-    <div class="proj">
+    <div class="proj" id="relay">
       <div class="ptop"><h3>Fleet Orchestration Relay</h3><span class="status wip">In progress</span></div>
       <p>A relay system for delegating and running tasks across the fleet, including detached AI-agent jobs. It stages a scoped request, dispatches it to the right node, and collects the results back. Built on a keyless SSH mesh over Tailscale with a token-gated, read-before-write protocol so jobs stay auditable and safe to run unattended.</p>
       <div class="ptags"><span>Linux</span><span>Tailscale</span><span>SSH</span><span>Python</span><span>Automation</span></div>
     </div>
-    <div class="proj">
+    <div class="proj" id="dashboard">
       <div class="ptop"><h3>Fleet Dashboard &amp; Knowledge Base</h3><span class="status wip">In progress</span></div>
       <p>A single surface for the homelab with live node health, running jobs, and an activity feed, merged with a local-first knowledge browser over my project notes: keyword and semantic search, backlinks, and a graph view. All served behind a fail-closed access gate.</p>
       <div class="ptags"><span>Python</span><span>Semantic search</span><span>RAG</span><span>Cloudflare Access</span><span>PWA</span></div>
     </div>
-    <div class="proj">
+    <div class="proj" id="loupe">
       <div class="ptop"><h3>Loupe</h3><span class="status wip">In progress</span></div>
       <p>A self-hosted full-stack photo-culling app I built and run on my own hardware. It scores and groups a large photo library through a machine-learning pipeline (face recognition and quality scoring on a dedicated GPU node) and serves a review interface for fast culling.</p>
       <div class="ptags"><span>Python</span><span>SQLite</span><span>Self-hosted</span><span>Computer vision</span><span>ONNX</span></div>
@@ -185,6 +189,7 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
     </div>
   </div>
 </main>
-<footer><span class="footer-name">DAVID GOMEZ &middot; Richardson, TX</span><div class="footer-links"><a href="mailto:career@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a></div></footer>
+<div class="next-link"><a href="resume.html">Next: Résumé &rarr;</a></div>
+<footer><span class="footer-name">DAVID GOMEZ &middot; Richardson, TX</span><div class="footer-links"><a href="mailto:career@davidgomez.cc">Email</a><a href="https://www.linkedin.com/in/davidisdeploying/" target="_blank">LinkedIn</a><a href="https://github.com/davidisdeploying" target="_blank">GitHub</a></div></footer>
 </body>
 </html>
