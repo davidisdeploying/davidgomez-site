@@ -10,6 +10,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("rfc822", (d) => new Date(d).toUTCString());
   eleventyConfig.addFilter("isoDate", (d) => new Date(d).toISOString().slice(0, 10));
   eleventyConfig.addFilter("topicSlug", slugify);
+  eleventyConfig.addFilter("staggerWords", (text) =>
+    String(text)
+      .split(/(\s+)/)
+      .map((chunk, i) => (/^\s*$/.test(chunk) ? chunk : `<span class="w" style="--wi:${Math.floor(i / 2)}">${chunk}</span>`))
+      .join("")
+  );
 
   eleventyConfig.addGlobalData("monthsOnJob", () => {
     const start = new Date(2025, 8, 15);

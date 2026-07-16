@@ -11,12 +11,13 @@ next:
   <div class="phero">
     <div class="eyebrow">The homelab</div>
     <h1>Five machines, <em>one fleet</em></h1>
-    <p class="lead">I design, build, and run a small self-hosted infrastructure: five machines, each with a defined role, meshed together and reachable from anywhere. This is the map of it: how the pieces connect, how it stays up when one of them doesn't, and what actually runs on it.</p>
+    <p class="lead">{{ "I design, build, and run a small self-hosted infrastructure: five machines, each with a defined role, meshed together and reachable from anywhere. This is the map of it: how the pieces connect, how it stays up when one of them doesn't, and what actually runs on it." | staggerWords | safe }}</p>
   </div>
 
   <div class="arch-wrap">
     <svg class="arch-svg" viewBox="0 0 460 540" role="img" aria-label="Five nodes meshed with Tailscale: control plane, public ingress, GPU compute, deploy host, and NAS storage. A dashed line runs from the ingress node to the public internet through a Cloudflare Tunnel. A dashed arc between the control plane and ingress nodes marks the failover path.">
       <line class="trunk" pathLength="100" x1="55" y1="62" x2="55" y2="478"/>
+      <line class="signal-line" pathLength="100" x1="55" y1="62" x2="55" y2="478"/>
       <line class="stub" pathLength="100" x1="55" y1="62" x2="95" y2="62"/>
       <line class="stub" pathLength="100" x1="55" y1="166" x2="95" y2="166"/>
       <line class="stub" pathLength="100" x1="55" y1="270" x2="95" y2="270"/>
@@ -25,9 +26,11 @@ next:
       <text class="mesh-label" x="25" y="270" text-anchor="middle" transform="rotate(-90 25 270)">TAILSCALE MESH</text>
 
       <path class="failover-line" pathLength="100" d="M345,62 Q405,114 345,166"/>
+      <path class="signal-line signal-failover" pathLength="100" d="M345,62 Q405,114 345,166"/>
       <text class="failover-label" x="392" y="118" text-anchor="middle">FAILOVER</text>
 
       <line class="net-line" pathLength="100" x1="345" y1="166" x2="380" y2="166"/>
+      <line class="signal-line signal-net" pathLength="100" x1="345" y1="166" x2="380" y2="166"/>
       <rect class="net-box" x="380" y="141" width="68" height="50" rx="8"/>
       <text class="net-title" x="414" y="163" text-anchor="middle">Public</text>
       <text class="net-title" x="414" y="178" text-anchor="middle">internet</text>
@@ -36,26 +39,31 @@ next:
       <rect class="node-accent" x="95" y="20" width="4" height="84"/>
       <text class="node-title" x="113" y="56">Control plane</text>
       <text class="node-sub" x="113" y="78">Raspberry Pi</text>
+      <circle class="node-led" cx="331" cy="34" r="4"/>
 
       <rect class="node-box" x="95" y="124" width="250" height="84" rx="10"/>
       <rect class="node-accent" x="95" y="124" width="4" height="84"/>
       <text class="node-title" x="113" y="160">Public ingress</text>
       <text class="node-sub" x="113" y="182">Raspberry Pi</text>
+      <circle class="node-led" cx="331" cy="138" r="4"/>
 
       <rect class="node-box" x="95" y="228" width="250" height="84" rx="10"/>
       <rect class="node-accent" x="95" y="228" width="4" height="84"/>
       <text class="node-title" x="113" y="264">GPU compute</text>
       <text class="node-sub" x="113" y="286">Dedicated GPU box</text>
+      <circle class="node-led" cx="331" cy="242" r="4"/>
 
       <rect class="node-box" x="95" y="332" width="250" height="84" rx="10"/>
       <rect class="node-accent" x="95" y="332" width="4" height="84"/>
       <text class="node-title" x="113" y="368">Deploy host</text>
       <text class="node-sub" x="113" y="390">Mac mini</text>
+      <circle class="node-led" cx="331" cy="346" r="4"/>
 
       <rect class="node-box" x="95" y="436" width="250" height="84" rx="10"/>
       <rect class="node-accent" x="95" y="436" width="4" height="84"/>
       <text class="node-title" x="113" y="472">NAS storage</text>
       <text class="node-sub" x="113" y="494">Network-attached storage</text>
+      <circle class="node-led" cx="331" cy="450" r="4"/>
     </svg>
     <p class="arch-legend">Solid line: the Tailscale mesh, every node reaches every other node directly. Dashed amber arc: the failover path, control plane and ingress duties can move to a standby if one node goes down. Dashed line on the right: the public ingress node's outbound Cloudflare Tunnel, the only path in from the internet.</p>
   </div>

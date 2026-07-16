@@ -11,7 +11,7 @@ next:
   <div class="phero">
     <div class="eyebrow">Stack</div>
     <h1>Everything I've <em>touched</em></h1>
-    <p class="lead">Every technology, tool, and idea that turns up in the build log, each bubble sized by how often it comes up. Bigger means more. Drawn straight from the devblog, so it grows as I write. Tap one to read the posts behind it.</p>
+    <p class="lead">{{ "Every technology, tool, and idea that turns up in the build log, each bubble sized by how often it comes up. Bigger means more. Drawn straight from the devblog, so it grows as I write. Tap one to read the posts behind it." | staggerWords | safe }}</p>
   </div>
   <div class="bubblewrap">
   {%- if collections.topicmap.nodes | length %}

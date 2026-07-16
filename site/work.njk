@@ -217,7 +217,7 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
 <div class="whero"><div class="whero-in">
   <div class="eyebrow">FutureTech Enterprise &middot; Plano, TX</div>
   <h1>What I do<br>at <em>work</em></h1>
-  <p class="wsub">A plain-English guide to my job as a Configuration Technician, for anyone who's ever wondered what I actually do all day.</p>
+  <p class="wsub">{{ "A plain-English guide to my job as a Configuration Technician, for anyone who's ever wondered what I actually do all day." | staggerWords | safe }}</p>
   <div class="wstats">
     <div class="wstat"><span class="n">{{ monthsOnJob }}</span><span class="l">Months on the job</span></div>
     <div class="wstat"><span class="n" style="--target:6">6</span><span class="l">Major customers served</span></div>

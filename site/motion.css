@@ -19,7 +19,14 @@
    ========================================================================== */
 
 :root{
-  --ease-develop: cubic-bezier(.22,1,.36,1);
+  /* v2 sleekness pass: every duration/easing below routes through these so
+     the whole site's feel is tunable from one place. */
+  --ease-darkroom: cubic-bezier(.22,1,.36,1);
+  --ease-develop: var(--ease-darkroom);
+  --dev-quick: .5s;
+  --dev-slow: .65s;
+  --strike-duration: 1.05s;
+  --exposure-duration: .55s;
 }
 
 /* --------------------------------------------------------------------------
@@ -45,13 +52,38 @@ html.no-motion *::after{
 
 @media (prefers-reduced-motion:no-preference){
   ::view-transition-group(*){
-    animation-duration: .45s;
-    animation-timing-function: var(--ease-develop);
+    animation-duration: var(--exposure-duration);
+    animation-timing-function: var(--ease-darkroom);
   }
-  ::view-transition-old(*),
+  /* v2: directional exposure. Outgoing page drops toward black as it
+     fades (exposure pulled), incoming develops up from dark (exposure
+     given), instead of v1's plain dissolve. */
+  ::view-transition-old(*){
+    animation: exposure-out var(--exposure-duration) var(--ease-darkroom) both;
+  }
   ::view-transition-new(*){
-    animation-duration: .45s;
-    animation-timing-function: var(--ease-develop);
+    animation: exposure-in var(--exposure-duration) var(--ease-darkroom) both;
+  }
+  @keyframes exposure-out{
+    from{ opacity: 1; filter: brightness(1); }
+    to{ opacity: 0; filter: brightness(.15); }
+  }
+  @keyframes exposure-in{
+    from{ opacity: 0; filter: brightness(.15); }
+    to{ opacity: 1; filter: brightness(1); }
+  }
+  /* the shared chrome (monogram/nav/kicker morphs, and the lamp below)
+     keep v1's plain morph/no-op instead of the exposure filter, so they
+     read as persisting through the cut rather than dipping dark. */
+  ::view-transition-old(dg-monogram), ::view-transition-new(dg-monogram),
+  ::view-transition-old(site-nav), ::view-transition-new(site-nav),
+  ::view-transition-old(page-kicker), ::view-transition-new(page-kicker){
+    animation-name: none;
+  }
+  ::view-transition-group(safelight-lamp),
+  ::view-transition-old(safelight-lamp),
+  ::view-transition-new(safelight-lamp){
+    animation: none !important;
   }
 }
 @media (prefers-reduced-motion:reduce){
@@ -94,6 +126,7 @@ html.no-motion::view-transition-new(*){ animation: none !important; }
   top: 0; left: 0;
   height: 2px; width: 100%;
   background: var(--amber);
+  box-shadow: 5px 0 9px -1px rgba(226,144,42,.6);
   transform: scaleX(0);
   transform-origin: 0 50%;
   z-index: 100;
@@ -124,39 +157,107 @@ html.no-motion::view-transition-new(*){ animation: none !important; }
   from{ opacity: 0; filter: brightness(.35); transform: translateY(12px); }
   to{ opacity: 1; filter: brightness(1); transform: translateY(0); }
 }
-@keyframes develop-highlight{
-  from{ filter: brightness(.3) saturate(.6); }
-  to{ filter: brightness(1) saturate(1); }
+
+/* v2: the safelight strike. Replaces v1's smooth develop-highlight
+   brightness-up with an old-bulb strike: dark, flash, off, one or two
+   sputters, then a settle into a faint steady amber glow. steps() on the
+   animation keeps each stage a hard snap rather than a smooth crossfade,
+   which is what reads as "bulb" instead of "fade". Three rhythm variants
+   (a/b/c) so repeated strikes across the site don't feel copy-pasted.
+   WCAG 2.3.1: each variant holds to 2-3 brief pulses, finishes under
+   var(--strike-duration) (1.05s), and never runs on a large surface. */
+@keyframes safelight-strike-a{
+  0%{ filter: brightness(.15) saturate(.4); text-shadow: none; }
+  8%{ filter: brightness(1.2) saturate(1.1); }
+  17%{ filter: brightness(.22) saturate(.45); }
+  31%{ filter: brightness(.85) saturate(.85); }
+  44%{ filter: brightness(.25) saturate(.5); }
+  60%{ filter: brightness(1) saturate(1); text-shadow: 0 0 13px rgba(226,144,42,.5); }
+  100%{ filter: brightness(1) saturate(1); text-shadow: 0 0 7px rgba(226,144,42,.3); }
+}
+@keyframes safelight-strike-b{
+  0%{ filter: brightness(.15) saturate(.4); text-shadow: none; }
+  10%{ filter: brightness(1.15) saturate(1.05); }
+  19%{ filter: brightness(.2) saturate(.45); }
+  26%{ filter: brightness(.8) saturate(.8); }
+  35%{ filter: brightness(.22) saturate(.48); }
+  47%{ filter: brightness(.95) saturate(.95); }
+  55%{ filter: brightness(.3) saturate(.55); }
+  68%{ filter: brightness(1) saturate(1); text-shadow: 0 0 13px rgba(226,144,42,.5); }
+  100%{ filter: brightness(1) saturate(1); text-shadow: 0 0 7px rgba(226,144,42,.3); }
+}
+@keyframes safelight-strike-c{
+  0%{ filter: brightness(.15) saturate(.4); text-shadow: none; }
+  9%{ filter: brightness(1.1) saturate(1); }
+  15%{ filter: brightness(.2) saturate(.42); }
+  24%{ filter: brightness(.75) saturate(.75); }
+  33%{ filter: brightness(.2) saturate(.45); }
+  41%{ filter: brightness(.9) saturate(.9); }
+  50%{ filter: brightness(.25) saturate(.5); }
+  63%{ filter: brightness(1) saturate(1); text-shadow: 0 0 13px rgba(226,144,42,.5); }
+  100%{ filter: brightness(1) saturate(1); text-shadow: 0 0 7px rgba(226,144,42,.3); }
 }
 
 @media (prefers-reduced-motion:no-preference){
+  /* kicker: develops up first, strikes shortly after it lands */
   html:not(.no-motion) .home .eyebrow,
-  html:not(.no-motion) .phero .eyebrow,
-  html:not(.no-motion) .whero .eyebrow,
+  html:not(.no-motion) .phero .eyebrow{
+    opacity: 0;
+    animation: develop .6s var(--ease-darkroom) 0s both,
+               safelight-strike-a var(--strike-duration) steps(1,jump-end) .6s both;
+  }
+  html:not(.no-motion) .whero .eyebrow{
+    opacity: 0;
+    animation: develop .6s var(--ease-darkroom) 0s both,
+               safelight-strike-b var(--strike-duration) steps(1,jump-end) .6s both;
+  }
   html:not(.no-motion) .rhead .eyebrow{
     opacity: 0;
-    animation: develop .6s var(--ease-develop) 0s both;
+    animation: develop .6s var(--ease-darkroom) 0s both,
+               safelight-strike-c var(--strike-duration) steps(1,jump-end) .6s both;
   }
-  html:not(.no-motion) .hero-sub,
-  html:not(.no-motion) .phero .lead,
-  html:not(.no-motion) .wsub,
   html:not(.no-motion) .rcontact{
     opacity: 0;
-    animation: develop .65s var(--ease-develop) .2s both;
+    animation: develop var(--dev-slow) var(--ease-darkroom) .2s both;
   }
   html:not(.no-motion) .home .plate,
   html:not(.no-motion) .wstats{
     opacity: 0;
-    animation: develop .65s var(--ease-develop) .34s both;
+    animation: develop var(--dev-slow) var(--ease-darkroom) .34s both;
   }
-  /* the amber accent word: never opacity, filter-only, comes up last */
+  /* the amber accent word: never opacity, filter-only, strikes last */
   html:not(.no-motion) .hero-title em,
-  html:not(.no-motion) .phero h1 em,
-  html:not(.no-motion) .whero h1 em,
+  html:not(.no-motion) .phero h1 em{
+    display: inline-block;
+    animation: safelight-strike-a var(--strike-duration) steps(1,jump-end) .75s both;
+  }
+  html:not(.no-motion) .whero h1 em{
+    display: inline-block;
+    animation: safelight-strike-b var(--strike-duration) steps(1,jump-end) .75s both;
+  }
   html:not(.no-motion) .rname em{
     display: inline-block;
-    filter: brightness(.3) saturate(.6);
-    animation: develop-highlight .5s var(--ease-develop) .45s both;
+    animation: safelight-strike-c var(--strike-duration) steps(1,jump-end) .75s both;
+  }
+}
+
+/* v2: per-word hero develop. Templates wrap the lede in
+   <span class="w" style="--wi:N">word</span> (Nunjucks staggerWords filter,
+   or hand markup on the one passthrough HTML page). Kicker already lands
+   first (above) and the amber word strikes last, this fills the gap
+   between them with a tight per-word stagger instead of one block fade. */
+@keyframes word-develop{
+  from{ opacity: 0; filter: brightness(.4); transform: translateY(6px); }
+  to{ opacity: 1; filter: brightness(1); transform: translateY(0); }
+}
+.hero-sub .w, .phero .lead .w, .wsub .w{ display: inline-block; }
+@media (prefers-reduced-motion:no-preference){
+  html:not(.no-motion) .hero-sub .w,
+  html:not(.no-motion) .phero .lead .w,
+  html:not(.no-motion) .wsub .w{
+    opacity: 0;
+    animation: word-develop .5s var(--ease-darkroom) both;
+    animation-delay: calc(var(--wi,0) * 20ms + .32s);
   }
 }
 
@@ -230,6 +331,20 @@ html.no-motion::view-transition-new(*){ animation: none !important; }
       from{ opacity: 0; filter: brightness(.45); transform: scale(.8); }
       to{ opacity: 1; filter: brightness(1); transform: scale(1); }
     }
+
+    /* v2: amber section labels strike as they scroll in, each .shead .lbl
+       runs its own view() timeline off its own entry so instances down a
+       long page desync naturally. Variant cycles where a page repeats
+       several .shead rows under a shared parent (infra/resume). */
+    .shead .lbl{
+      animation: safelight-strike-a var(--strike-duration) steps(1,jump-end) both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    .infra-section:nth-of-type(3n+2) .shead .lbl,
+    .rsection:nth-of-type(3n+2) .shead .lbl{ animation-name: safelight-strike-b; }
+    .infra-section:nth-of-type(3n) .shead .lbl,
+    .rsection:nth-of-type(3n) .shead .lbl{ animation-name: safelight-strike-c; }
   }
 }
 
@@ -289,6 +404,59 @@ html.no-motion::view-transition-new(*){ animation: none !important; }
       from{ opacity: 0; }
       to{ opacity: 1; }
     }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5b. INFRASTRUCTURE MAP COMES ALIVE
+   After the self-draw above finishes: node status LEDs blink in slow
+   desynchronized loops, and a sparse-dash "signal" overlay line (a second,
+   independent element layered on the real trunk/net/failover lines so it
+   never fights the self-draw's own stroke-dashoffset animation) drifts to
+   read as live traffic. Both are real-clock (animation-timeline: auto),
+   delayed to start after the scroll-triggered draw-in is done playing.
+   Kill: delete this section (and the .node-led/.signal-line elements are
+   inert without it).
+   -------------------------------------------------------------------------- */
+.arch-svg .node-led{ fill: var(--amber); opacity: .35; }
+.arch-svg .signal-line{ fill: none; stroke: var(--lit); stroke-width: 1.6; stroke-dasharray: 3 9; opacity: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline: view()){
+    .arch-svg .node-led{
+      filter: drop-shadow(0 0 2px rgba(226,144,42,.5));
+      animation: led-blink 4.4s ease-in-out infinite;
+      animation-delay: 1.7s;
+    }
+    .arch-svg .node-led:nth-of-type(2){ animation-duration: 5.2s; animation-delay: 2.1s; }
+    .arch-svg .node-led:nth-of-type(3){ animation-duration: 3.6s; animation-delay: 1.85s; }
+    .arch-svg .node-led:nth-of-type(4){ animation-duration: 5.8s; animation-delay: 2.4s; }
+    .arch-svg .node-led:nth-of-type(5){ animation-duration: 4.1s; animation-delay: 2.05s; }
+    @keyframes led-blink{
+      0%,100%{ opacity: .35; filter: drop-shadow(0 0 2px rgba(226,144,42,.5)); }
+      50%{ opacity: 1; filter: drop-shadow(0 0 5px rgba(226,144,42,.9)); }
+    }
+
+    .arch-svg .signal-line{
+      animation: signal-fade-in .6s var(--ease-darkroom) 2.1s both,
+                 signal-drift 7s linear 2.1s infinite;
+      animation-timeline: view(), auto;
+      animation-range: entry 0% cover 50%, normal;
+    }
+    .arch-svg .signal-failover{
+      animation: signal-fade-in .6s var(--ease-darkroom) 2.3s both,
+                 signal-drift 9s linear 2.3s infinite;
+      animation-timeline: view(), auto;
+      animation-range: entry 0% cover 50%, normal;
+    }
+    .arch-svg .signal-net{
+      animation: signal-fade-in .6s var(--ease-darkroom) 2.5s both,
+                 signal-drift 6.4s linear 2.5s infinite;
+      animation-timeline: view(), auto;
+      animation-range: entry 0% cover 50%, normal;
+    }
+    @keyframes signal-fade-in{ from{ opacity: 0; } to{ opacity: .55; } }
+    @keyframes signal-drift{ from{ stroke-dashoffset: 0; } to{ stroke-dashoffset: -120; } }
   }
 }
 
@@ -353,23 +521,51 @@ html.no-motion::view-transition-new(*){ animation: none !important; }
 }
 .next-link a:hover{ transform: translateX(4px); }
 
-/* nav sliding amber underline */
+/* v2: nav links become darkroom indicator lamps. The active page gets a
+   steady lit dot + halo; the v1 sliding underline is upgraded to a
+   glowing filament (gradient, brighter leading edge); hover fires one
+   micro-strike (<400ms, well inside the WCAG 2.3.1 flicker budget) on
+   that filament rather than on any large surface. */
 .nav-links a{
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.nav-links a.active::before{
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 8px 1px rgba(226,144,42,.6);
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion:no-preference){
+  .nav-links a.active::before{ animation: dot-breathe 3.4s ease-in-out infinite; }
 }
 .nav-links a::after{
   content: '';
   position: absolute;
   left: 0; right: 0; bottom: -4px;
-  height: 1px;
-  background: var(--amber);
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--lit), var(--amber) 70%, transparent);
+  box-shadow: 0 0 6px 0 rgba(226,144,42,.5);
   transform: scaleX(0);
   transform-origin: 0 50%;
-  transition: transform .2s var(--ease-develop);
+  transition: transform .22s var(--ease-darkroom);
 }
 .nav-links a:hover::after,
 .nav-links a.active::after{ transform: scaleX(1); }
+@keyframes nav-micro-strike{
+  0%{ filter: brightness(.3); }
+  15%{ filter: brightness(1.6); }
+  30%{ filter: brightness(.5); }
+  55%{ filter: brightness(1.15); }
+  100%{ filter: brightness(1); }
+}
+@media (prefers-reduced-motion:no-preference){
+  .nav-links a:hover::after{ animation: nav-micro-strike .35s steps(1,jump-end) both; }
+}
 
 /* card hover: filter brightness lift + warm border, no shadow/lift */
 .tile:hover,
@@ -382,6 +578,69 @@ html.no-motion::view-transition-new(*){ animation: none !important; }
   box-shadow: none;
 }
 .proj.lead-proj:hover{ box-shadow: 0 0 0 1px rgba(186,117,23,.22); }
+
+/* v2: light behaves in the page. Hairline rules ignite left-to-right with
+   a brief bright leading edge, section headers get a single light-sweep
+   on scroll-in, and list hovers get a contact-sheet lightbox lift. */
+.shead .rule{ position: relative; overflow: hidden; }
+.shead .rule::after,
+.divider::after{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--lit) 45%, transparent 65%);
+  transform: translateX(-110%);
+}
+.divider{ position: relative; overflow: hidden; }
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline: view()){
+    .shead .rule::after,
+    .divider::after{
+      animation: hairline-ignite .9s var(--ease-darkroom) both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 55%;
+    }
+    @keyframes hairline-ignite{
+      from{ transform: translateX(-110%); }
+      to{ transform: translateX(110%); }
+    }
+  }
+}
+
+/* section headers: one light-sweep pass on scroll-in, background-clip
+   text so it reads as light crossing the letterforms, not a color change.
+   Falls back to plain var(--ink) text wherever background-clip:text or
+   view() isn't supported. */
+@media (prefers-reduced-motion:no-preference){
+  @supports ((background-clip:text) or (-webkit-background-clip:text)) and (animation-timeline: view()){
+    main h2, .post-body h2{
+      background-image: linear-gradient(100deg, var(--ink) 35%, var(--lit) 50%, var(--ink) 65%);
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: header-sweep 1.1s var(--ease-darkroom) both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
+    @keyframes header-sweep{
+      from{ background-position: 200% 0; }
+      to{ background-position: -50% 0; }
+    }
+  }
+}
+
+/* start-here / post list hover: contact-sheet lightbox feel, an inset
+   frame brightens and exposure lifts slightly. box-shadow (not border) so
+   the list's box model never shifts. */
+.shitem, .pcard{
+  border-radius: 4px;
+  transition: box-shadow .18s var(--ease-darkroom), filter .18s var(--ease-darkroom);
+}
+.shitem:hover, .pcard:hover{
+  box-shadow: inset 0 0 0 1px rgba(226,144,42,.4);
+  filter: brightness(1.06);
+}
 
 /* --------------------------------------------------------------------------
    7. SUBTLE PARALLAX
@@ -403,5 +662,50 @@ html.no-motion::view-transition-new(*){ animation: none !important; }
       from{ transform: translateY(0); }
       to{ transform: translateY(6px); }
     }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. THE LAMP (site-wide ambient light layer)
+   A fixed body-level pseudo-element: a soft radial amber pool anchored
+   top-center, like the lamp hanging over the bench. Strikes on at first
+   paint, then breathes almost imperceptibly. Named for a view transition
+   so it persists un-faded across navigations (excluded from the section 1
+   exposure filter, and given its own no-op transition group above).
+   Contrast: the gradient itself tops out at .14 alpha amber at its
+   brightest point and falls to 0 by 78% of its radius, well short of any
+   body text; verified against the darkest text areas at load and mid-page
+   scroll. Kill: delete this section (the pseudo-element only exists here).
+   -------------------------------------------------------------------------- */
+body::before{
+  content: '';
+  position: fixed;
+  top: -16%; left: 50%;
+  width: 920px; max-width: 150vw; height: 620px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(226,144,42,.14), rgba(226,144,42,.045) 55%, transparent 78%);
+  opacity: 1;
+  pointer-events: none;
+  z-index: 0;
+  view-transition-name: safelight-lamp;
+}
+@media (prefers-reduced-motion:no-preference){
+  html:not(.no-motion) body::before{
+    opacity: 0;
+    animation: lamp-strike 1.8s var(--ease-darkroom) .1s both,
+               lamp-breathe 10s ease-in-out 1.9s infinite;
+  }
+  @keyframes lamp-strike{
+    0%{ opacity: 0; filter: brightness(.3); }
+    10%{ opacity: .55; filter: brightness(1.3); }
+    22%{ opacity: .15; filter: brightness(.4); }
+    40%{ opacity: .5; filter: brightness(.95); }
+    55%{ opacity: .2; filter: brightness(.5); }
+    75%{ opacity: 1; filter: brightness(1); }
+    100%{ opacity: 1; filter: brightness(1); }
+  }
+  @keyframes lamp-breathe{
+    0%, 100%{ filter: brightness(1); opacity: 1; }
+    50%{ filter: brightness(1.08); opacity: .92; }
   }
 }
