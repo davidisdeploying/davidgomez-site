@@ -1,0 +1,407 @@
+/* ==========================================================================
+   motion.css : davidgomez.cc darkroom motion layer
+   Zero client JavaScript. Every rule here is either a CSS transition/
+   keyframe animation, a cross-document View Transition, or a scroll-driven
+   animation (animation-timeline: view()/scroll()).
+
+   Concept: "the darkroom develops", elements come up from dark like a
+   print in the tray (opacity + brightness + a whisper of translateY/scale),
+   warm and unhurried. Durations 450-700ms, ease cubic-bezier(.22,1,.36,1).
+
+   SAFETY RULES this whole file follows:
+   1. Nothing here ever hides real content by default. Every "start hidden"
+      declaration lives inside `@media (prefers-reduced-motion:no-preference)`
+      (and, where relevant, `@supports`) so browsers that don't run the
+      animation never end up with invisible content.
+   2. html.no-motion is a global kill-switch (see section 0).
+   3. Each numbered section below is independently removable, delete the
+      section, lose only that effect.
+   ========================================================================== */
+
+:root{
+  --ease-develop: cubic-bezier(.22,1,.36,1);
+}
+
+/* --------------------------------------------------------------------------
+   0. GLOBAL KILL-SWITCH
+   html.no-motion turns every effect in this file off in one shot.
+   -------------------------------------------------------------------------- */
+html.no-motion *,
+html.no-motion *::before,
+html.no-motion *::after{
+  animation: none !important;
+  transition: none !important;
+  scroll-timeline: none !important;
+  view-timeline: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   1. CROSS-DOCUMENT VIEW TRANSITIONS
+   Kill: delete this whole section (or add html.no-motion, handled below).
+   -------------------------------------------------------------------------- */
+@view-transition{
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion:no-preference){
+  ::view-transition-group(*){
+    animation-duration: .45s;
+    animation-timing-function: var(--ease-develop);
+  }
+  ::view-transition-old(*),
+  ::view-transition-new(*){
+    animation-duration: .45s;
+    animation-timing-function: var(--ease-develop);
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  html::view-transition-group(*),
+  html::view-transition-old(*),
+  html::view-transition-new(*){ animation: none !important; }
+}
+html.no-motion::view-transition-group(*),
+html.no-motion::view-transition-old(*),
+html.no-motion::view-transition-new(*){ animation: none !important; }
+
+/* named elements that morph across navigations: the DG monogram, the nav
+   shell, and the page kicker. Scoped to the single top-of-page instance of
+   each so names stay unique per document (work.html/resume.html/etc reuse
+   .eyebrow many times for section labels, so we only name the hero one). */
+@media (prefers-reduced-motion:no-preference){
+  html:not(.no-motion) .nav-logo{ view-transition-name: dg-monogram; }
+  html:not(.no-motion) nav{ view-transition-name: site-nav; }
+  html:not(.no-motion) .home .eyebrow,
+  html:not(.no-motion) .phero .eyebrow,
+  html:not(.no-motion) .whero .eyebrow,
+  html:not(.no-motion) .rhead .eyebrow{ view-transition-name: page-kicker; }
+}
+
+/* per-post title morph hook: templates set a custom property, e.g.
+   style="--vt-name:post-2026-07-13-notes-under-version-control" on the
+   devblog list card title AND the post's own h1, so navigating between
+   them morphs the same element instead of cross-fading it. */
+@media (prefers-reduced-motion:no-preference){
+  html:not(.no-motion) [style*="--vt-name"]{ view-transition-name: var(--vt-name, none); }
+}
+
+/* --------------------------------------------------------------------------
+   2. FILM-LEADER SCROLL PROGRESS
+   A 2px amber bar fixed at the very top, width driven by document scroll.
+   Kill: delete this section (the bar element stays in the DOM at 0 width).
+   -------------------------------------------------------------------------- */
+.motion-progress{
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px; width: 100%;
+  background: var(--amber);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  z-index: 100;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline: scroll()){
+    .motion-progress{
+      animation: motion-progress-scale linear both;
+      animation-timeline: scroll(root);
+    }
+    @keyframes motion-progress-scale{
+      from{ transform: scaleX(0); }
+      to{ transform: scaleX(1); }
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. HERO DEVELOP-UP (load-time)
+   Kicker -> lede/sub -> stat row develop up from dark. The H1 itself is
+   deliberately left out of the opacity/translate treatment (LCP rule: it
+   must be readable immediately, never blank-then-fade), only its amber
+   <em> word gets a fast, filter-only "highlight coming up in the tray"
+   treatment that never touches opacity.
+   -------------------------------------------------------------------------- */
+@keyframes develop{
+  from{ opacity: 0; filter: brightness(.35); transform: translateY(12px); }
+  to{ opacity: 1; filter: brightness(1); transform: translateY(0); }
+}
+@keyframes develop-highlight{
+  from{ filter: brightness(.3) saturate(.6); }
+  to{ filter: brightness(1) saturate(1); }
+}
+
+@media (prefers-reduced-motion:no-preference){
+  html:not(.no-motion) .home .eyebrow,
+  html:not(.no-motion) .phero .eyebrow,
+  html:not(.no-motion) .whero .eyebrow,
+  html:not(.no-motion) .rhead .eyebrow{
+    opacity: 0;
+    animation: develop .6s var(--ease-develop) 0s both;
+  }
+  html:not(.no-motion) .hero-sub,
+  html:not(.no-motion) .phero .lead,
+  html:not(.no-motion) .wsub,
+  html:not(.no-motion) .rcontact{
+    opacity: 0;
+    animation: develop .65s var(--ease-develop) .2s both;
+  }
+  html:not(.no-motion) .home .plate,
+  html:not(.no-motion) .wstats{
+    opacity: 0;
+    animation: develop .65s var(--ease-develop) .34s both;
+  }
+  /* the amber accent word: never opacity, filter-only, comes up last */
+  html:not(.no-motion) .hero-title em,
+  html:not(.no-motion) .phero h1 em,
+  html:not(.no-motion) .whero h1 em,
+  html:not(.no-motion) .rname em{
+    display: inline-block;
+    filter: brightness(.3) saturate(.6);
+    animation: develop-highlight .5s var(--ease-develop) .45s both;
+  }
+}
+
+/* reasonable equivalents on other page headers: infra/devblog/stack/
+   davidisdeploying share .phero, work.html has .whero, resume has .rhead,
+   all covered by the selectors above. Section header rows (every page
+   reuses .shead) get the same treatment as a lighter secondary reveal via
+   section 4's generic scroll reveal once they're below the fold; the very
+   first .shead on a page (immediately under the hero) also develops on
+   load rather than waiting on scroll. */
+@media (prefers-reduced-motion:no-preference){
+  html:not(.no-motion) main > .shead:first-of-type,
+  html:not(.no-motion) .page > .rsection:first-of-type .shead{
+    opacity: 0;
+    animation: develop .6s var(--ease-develop) .4s both;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. SCROLL-DRIVEN REVEALS
+   Proof cards, start-here entries, section headers, project/customer/skill
+   cards, footer blocks develop as they enter the viewport, staggered by
+   nth-child. Kill: delete this section.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline: view()){
+    :where(
+      .proofcard, .tile, .shitem, .pcard, .proj, .ccard, .scard, .fstep,
+      .entry, .edu, .infra-section, .wstat, footer, main .shead
+    ){
+      opacity: 0;
+      filter: brightness(.5);
+      transform: translateY(14px);
+      animation: develop .6s var(--ease-develop) both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+
+    /* nth-child stagger inside the common grid/list containers */
+    :where(.tiles, .proofcards, .starthere, .posts, .projects, .cust, .skills, .flow, .infra-page, .wstats, .rsection) > *:nth-child(1){ animation-delay: 0ms; }
+    :where(.tiles, .proofcards, .starthere, .posts, .projects, .cust, .skills, .flow, .infra-page, .wstats, .rsection) > *:nth-child(2){ animation-delay: 80ms; }
+    :where(.tiles, .proofcards, .starthere, .posts, .projects, .cust, .skills, .flow, .infra-page, .wstats, .rsection) > *:nth-child(3){ animation-delay: 160ms; }
+    :where(.tiles, .proofcards, .starthere, .posts, .projects, .cust, .skills, .flow, .infra-page, .wstats, .rsection) > *:nth-child(4){ animation-delay: 240ms; }
+    :where(.tiles, .proofcards, .starthere, .posts, .projects, .cust, .skills, .flow, .infra-page, .wstats, .rsection) > *:nth-child(5){ animation-delay: 320ms; }
+    :where(.tiles, .proofcards, .starthere, .posts, .projects, .cust, .skills, .flow, .infra-page, .wstats, .rsection) > *:nth-child(6){ animation-delay: 400ms; }
+    :where(.tiles, .proofcards, .starthere, .posts, .projects, .cust, .skills, .flow, .infra-page, .wstats, .rsection) > *:nth-child(7){ animation-delay: 480ms; }
+    :where(.tiles, .proofcards, .starthere, .posts, .projects, .cust, .skills, .flow, .infra-page, .wstats, .rsection) > *:nth-child(n+8){ animation-delay: 560ms; }
+
+    /* the very first .shead in the hero already developed on load (section 3) */
+    html:not(.no-motion) main > .shead:first-of-type{
+      animation: none;
+      opacity: 1;
+      filter: none;
+      transform: none;
+    }
+
+    /* topic bubbles (home + stack map): staggered scale .8 -> 1 + develop.
+       Each bubble is its own view-timeline subject, so lower/later bubbles
+       in the packed layout naturally trigger a beat after earlier ones. */
+    .bubbles .orb{
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+      opacity: 0;
+      filter: brightness(.45);
+      transform: scale(.8);
+      animation: develop-pop .55s var(--ease-develop) both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 45%;
+    }
+    @keyframes develop-pop{
+      from{ opacity: 0; filter: brightness(.45); transform: scale(.8); }
+      to{ opacity: 1; filter: brightness(1); transform: scale(1); }
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. INFRASTRUCTURE SVG SELF-DRAW
+   The fleet map draws itself on scroll-in: connections line-draw via
+   stroke-dashoffset (each line/path carries pathLength="100" in the
+   template so one dasharray/keyframe works for all of them regardless of
+   real geometry), then nodes develop, then labels fade in last.
+   Kill: delete this section.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline: view()){
+    .arch-svg .trunk,
+    .arch-svg .stub,
+    .arch-svg .net-line,
+    .arch-svg .failover-line{
+      stroke-dasharray: 100 100;
+      stroke-dashoffset: 100;
+      animation: arch-draw 1s var(--ease-develop) both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
+    }
+    @keyframes arch-draw{
+      to{ stroke-dashoffset: 0; }
+    }
+
+    .arch-svg .node-box,
+    .arch-svg .node-accent,
+    .arch-svg .net-box{
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+      opacity: 0;
+      filter: brightness(.4);
+      transform: scale(.94);
+      animation: develop-svg .5s var(--ease-develop) both;
+      animation-timeline: view();
+      animation-range: entry 15% cover 55%;
+    }
+    @keyframes develop-svg{
+      from{ opacity: 0; filter: brightness(.4); transform: scale(.94); }
+      to{ opacity: 1; filter: brightness(1); transform: scale(1); }
+    }
+
+    .arch-svg .node-title,
+    .arch-svg .node-sub,
+    .arch-svg .net-title,
+    .arch-svg .failover-label,
+    .arch-svg .mesh-label,
+    .arch-legend{
+      opacity: 0;
+      animation: develop-label .5s var(--ease-develop) both;
+      animation-timeline: view();
+      animation-range: entry 25% cover 65%;
+    }
+    @keyframes develop-label{
+      from{ opacity: 0; }
+      to{ opacity: 1; }
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. MICRO-MOMENTS
+   Status dot breathing pulse, stat count-up, next-arrow nudge, nav
+   underline, card hover brighten. Kill: delete the relevant block.
+   -------------------------------------------------------------------------- */
+
+/* status dot: the amber dot in front of every kicker + the nav monogram
+   dot, slow breathing pulse */
+@media (prefers-reduced-motion:no-preference){
+  .eyebrow::before,
+  .nav-logo .dot{
+    animation: dot-breathe 3s ease-in-out infinite;
+  }
+}
+@keyframes dot-breathe{
+  0%, 100%{ opacity: 1; filter: brightness(1); }
+  50%{ opacity: .55; filter: brightness(1.4); }
+}
+
+/* stat count-up: templates set style="--target:N" on a .n span holding
+   the plain integer text as a permanent, always-correct fallback. Where
+   supported + motion allowed, the plain text is visually swapped for a
+   generated counter that animates 0 -> N on scroll-in and always lands on
+   the same digits. Non-integer stats (e.g. "10+", the infinity glyph)
+   don't get --target and simply fall back to the generic develop reveal
+   in section 4. */
+@property --num{
+  syntax: '<integer>';
+  inherits: true;
+  initial-value: 0;
+}
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline: view()){
+    .wstat .n[style*="--target"]{
+      --num: 0;
+      position: relative;
+      color: transparent;
+    }
+    .wstat .n[style*="--target"]::after{
+      content: counter(wstat-num);
+      counter-reset: wstat-num var(--num);
+      position: absolute;
+      inset: 0;
+      color: var(--ink);
+      animation: wstat-count 1s linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+    @keyframes wstat-count{
+      to{ --num: var(--target); }
+    }
+  }
+}
+
+/* next-link threading arrows nudge on hover */
+.next-link a{
+  display: inline-block;
+  transition: transform .18s var(--ease-develop), color .12s;
+}
+.next-link a:hover{ transform: translateX(4px); }
+
+/* nav sliding amber underline */
+.nav-links a{
+  position: relative;
+  display: inline-block;
+}
+.nav-links a::after{
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 1px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform .2s var(--ease-develop);
+}
+.nav-links a:hover::after,
+.nav-links a.active::after{ transform: scaleX(1); }
+
+/* card hover: filter brightness lift + warm border, no shadow/lift */
+.tile:hover,
+.proofcard:hover,
+.proj:hover,
+.ccard:hover{
+  border-color: var(--amber);
+  filter: brightness(1.08);
+  transform: none;
+  box-shadow: none;
+}
+.proj.lead-proj:hover{ box-shadow: 0 0 0 1px rgba(186,117,23,.22); }
+
+/* --------------------------------------------------------------------------
+   7. SUBTLE PARALLAX
+   The nav monogram drifts a few px slower than the page as you scroll.
+   (Deliberately NOT applied to the hero kicker elements, those already
+   carry the load-time develop animation from section 3, and a single
+   element can't cleanly run a time-based entrance and a scroll-linked
+   drift through the same `animation` shorthand at once.)
+   Kill: delete this section.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline: scroll()){
+    html:not(.no-motion) .nav-logo{
+      animation: monogram-parallax linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 300px;
+    }
+    @keyframes monogram-parallax{
+      from{ transform: translateY(0); }
+      to{ transform: translateY(6px); }
+    }
+  }
+}

@@ -27,7 +27,7 @@ next:
   {%- for post in collections.post | reverse %}
     <a class="pcard" href="{{ post.url }}">
       <div class="pmeta">{{ post.data.date | readable }}</div>
-      <div class="ptitle">{{ post.data.title }}</div>
+      <div class="ptitle" style="--vt-name:post-{{ post.fileSlug }}">{{ post.data.title }}</div>
       <div class="psum">{{ post.data.summary }}</div>
       {%- if post.data.topics %}<div class="topics">{% for t in post.data.topics %}<span>{{ t }}</span>{% endfor %}</div>{% endif %}
     </a>

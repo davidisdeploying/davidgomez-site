@@ -214,8 +214,10 @@ details.topiccloud[open] .chev{transform:rotate(180deg)}
 @media(max-width:600px){.phero{padding:56px 22px 8px}.bloglist{padding:32px 22px 64px}.postwrap{padding:40px 22px 72px}}
 
 {% endraw %}</style>
+<link rel="stylesheet" href="/motion.css">
 </head>
 <body>
+<div class="motion-progress" aria-hidden="true"></div>
 <nav><a href="/index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="/index.html">Home</a></li><li><a href="/infrastructure.html"{% if page.url == "/infrastructure.html" %} class="active"{% endif %}>Infrastructure</a></li><li><a href="/davidisdeploying.html">Projects</a></li><li><a href="/devblog.html"{% if "/devblog" in page.url %} class="active"{% endif %}>Devblog</a></li><li><a href="/stack.html"{% if page.url == "/stack.html" %} class="active"{% endif %}>Stack</a></li><li><a href="/work.html">Work</a></li><li><a href="/resume.html">Résumé</a></li></ul></nav>
 {{ content | safe }}
 {%- if next %}<div class="next-link"><a href="{{ next.href }}">Next: {{ next.label }} &rarr;</a></div>{%- endif %}

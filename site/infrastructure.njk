@@ -16,18 +16,18 @@ next:
 
   <div class="arch-wrap">
     <svg class="arch-svg" viewBox="0 0 460 540" role="img" aria-label="Five nodes meshed with Tailscale: control plane, public ingress, GPU compute, deploy host, and NAS storage. A dashed line runs from the ingress node to the public internet through a Cloudflare Tunnel. A dashed arc between the control plane and ingress nodes marks the failover path.">
-      <line class="trunk" x1="55" y1="62" x2="55" y2="478"/>
-      <line class="stub" x1="55" y1="62" x2="95" y2="62"/>
-      <line class="stub" x1="55" y1="166" x2="95" y2="166"/>
-      <line class="stub" x1="55" y1="270" x2="95" y2="270"/>
-      <line class="stub" x1="55" y1="374" x2="95" y2="374"/>
-      <line class="stub" x1="55" y1="478" x2="95" y2="478"/>
+      <line class="trunk" pathLength="100" x1="55" y1="62" x2="55" y2="478"/>
+      <line class="stub" pathLength="100" x1="55" y1="62" x2="95" y2="62"/>
+      <line class="stub" pathLength="100" x1="55" y1="166" x2="95" y2="166"/>
+      <line class="stub" pathLength="100" x1="55" y1="270" x2="95" y2="270"/>
+      <line class="stub" pathLength="100" x1="55" y1="374" x2="95" y2="374"/>
+      <line class="stub" pathLength="100" x1="55" y1="478" x2="95" y2="478"/>
       <text class="mesh-label" x="25" y="270" text-anchor="middle" transform="rotate(-90 25 270)">TAILSCALE MESH</text>
 
-      <path class="failover-line" d="M345,62 Q405,114 345,166"/>
+      <path class="failover-line" pathLength="100" d="M345,62 Q405,114 345,166"/>
       <text class="failover-label" x="392" y="118" text-anchor="middle">FAILOVER</text>
 
-      <line class="net-line" x1="345" y1="166" x2="380" y2="166"/>
+      <line class="net-line" pathLength="100" x1="345" y1="166" x2="380" y2="166"/>
       <rect class="net-box" x="380" y="141" width="68" height="50" rx="8"/>
       <text class="net-title" x="414" y="163" text-anchor="middle">Public</text>
       <text class="net-title" x="414" y="178" text-anchor="middle">internet</text>

@@ -209,8 +209,10 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
 <meta name="twitter:image" content="https://davidgomez.cc/og.png">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/motion.css">
 </head>
 <body>
+<div class="motion-progress" aria-hidden="true"></div>
 <nav><a href="index.html" class="nav-logo"><span class="dot"></span>DG</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="infrastructure.html">Infrastructure</a></li><li><a href="davidisdeploying.html">Projects</a></li><li><a href="devblog.html">Devblog</a></li><li><a href="stack.html">Stack</a></li><li><a href="work.html" class="active">Work</a></li><li><a href="resume.html">Résumé</a></li></ul></nav>
 <div class="whero"><div class="whero-in">
   <div class="eyebrow">FutureTech Enterprise &middot; Plano, TX</div>
@@ -218,8 +220,8 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
   <p class="wsub">A plain-English guide to my job as a Configuration Technician, for anyone who's ever wondered what I actually do all day.</p>
   <div class="wstats">
     <div class="wstat"><span class="n">{{ monthsOnJob }}</span><span class="l">Months on the job</span></div>
-    <div class="wstat"><span class="n">6</span><span class="l">Major customers served</span></div>
-    <div class="wstat"><span class="n">138</span><span class="l">Pages of SOPs I work from</span></div>
+    <div class="wstat"><span class="n" style="--target:6">6</span><span class="l">Major customers served</span></div>
+    <div class="wstat"><span class="n" style="--target:138">138</span><span class="l">Pages of SOPs I work from</span></div>
     <div class="wstat"><span class="n">&#8734;</span><span class="l">Details that matter</span></div>
   </div>
 </div></div>

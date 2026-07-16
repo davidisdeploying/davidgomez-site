@@ -63,7 +63,7 @@ export default function (eleventyConfig) {
   ["davidisdeploying", "resume", "404"].forEach((p) =>
     eleventyConfig.addPassthroughCopy({ ["site/" + p + ".html"]: p + ".html" })
   );
-  ["og.png", "favicon.png", "apple-touch-icon.png", "robots.txt"].forEach((f) =>
+  ["og.png", "favicon.png", "apple-touch-icon.png", "robots.txt", "motion.css"].forEach((f) =>
     eleventyConfig.addPassthroughCopy({ ["site/" + f]: f })
   );
   return {
