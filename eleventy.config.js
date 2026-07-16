@@ -8,7 +8,17 @@ export default function (eleventyConfig) {
     return M[x.getUTCMonth()] + " " + x.getUTCDate() + ", " + x.getUTCFullYear();
   });
   eleventyConfig.addFilter("rfc822", (d) => new Date(d).toUTCString());
+  eleventyConfig.addFilter("isoDate", (d) => new Date(d).toISOString().slice(0, 10));
   eleventyConfig.addFilter("topicSlug", slugify);
+
+  eleventyConfig.addGlobalData("monthsOnJob", () => {
+    const start = new Date(2025, 8, 15);
+    const now = new Date();
+    let m = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+    if (now.getDate() < start.getDate()) m--;
+    if (m < 0) m = 0;
+    return m + "+";
+  });
 
   const gather = (api) => {
     const map = new Map();
@@ -50,10 +60,10 @@ export default function (eleventyConfig) {
     return { w: W, h: H, nodes };
   });
 
-  ["work", "davidisdeploying", "resume"].forEach((p) =>
+  ["davidisdeploying", "resume", "404"].forEach((p) =>
     eleventyConfig.addPassthroughCopy({ ["site/" + p + ".html"]: p + ".html" })
   );
-  ["og.png", "favicon.png", "apple-touch-icon.png"].forEach((f) =>
+  ["og.png", "favicon.png", "apple-touch-icon.png", "robots.txt"].forEach((f) =>
     eleventyConfig.addPassthroughCopy({ ["site/" + f]: f })
   );
   return {

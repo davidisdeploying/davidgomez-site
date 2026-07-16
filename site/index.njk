@@ -163,7 +163,7 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
     <a href="davidisdeploying.html" class="tile">
       <span class="tile-tag">Builds</span>
       <div class="tile-title">Projects</div>
-      <p class="tile-desc">Things I've shipped &mdash; Loupe, Tandem, this site &mdash; with the stack behind each.</p>
+      <p class="tile-desc">Things I've shipped (Loupe, Tandem, this site) with the stack behind each.</p>
       <span class="tile-arrow">&#8599;</span>
     </a>
     <a href="devblog.html" class="tile">
@@ -181,7 +181,7 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
     <a href="resume.html" class="tile">
       <span class="tile-tag">Background</span>
       <div class="tile-title">R&eacute;sum&eacute;</div>
-      <p class="tile-desc">Full work history, skills, and education &mdash; logistics and IT support to hardware deployment.</p>
+      <p class="tile-desc">Full work history, skills, and education: logistics and IT support to hardware deployment.</p>
       <span class="tile-arrow">&#8599;</span>
     </a>
     <a href="https://loupeculling.com" class="tile tile-loupe" target="_blank" rel="noopener">
@@ -234,7 +234,7 @@ footer{margin-top:auto;border-top:1px solid var(--line);padding:24px 40px;displa
           </filter>
         </defs>
         {%- for n in collections.topicmap.nodes %}
-        <a href="/devblog/topic/{{ n.slug }}.html" class="orb"><title>{{ n.topic }} &mdash; {{ n.count }} post{% if n.count != 1 %}s{% endif %}</title>
+        <a href="/devblog/topic/{{ n.slug }}.html" class="orb"><title>{{ n.topic }} &middot; {{ n.count }} post{% if n.count != 1 %}s{% endif %}</title>
           <circle cx="{{ n.x }}" cy="{{ n.y }}" r="{{ n.r }}" fill="url(#orb)" filter="url(#glow)"/>
           <text class="cnt" x="{{ n.x }}" y="{{ n.cyCount }}" style="font-size:{{ n.cfont }}px">{{ n.count }}</text>
           {%- if n.showLabel %}<text class="lbl" x="{{ n.x }}" y="{{ n.cyLabel }}" style="font-size:{{ n.lfont }}px">{{ n.topic }}</text>{% endif %}
